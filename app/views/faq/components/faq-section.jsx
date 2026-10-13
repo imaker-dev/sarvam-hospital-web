@@ -3,7 +3,16 @@
 import { useEffect, useId, useMemo, useState } from "react";
 
 import Link from "next/link";
-import { ArrowUpRight, Phone, Search, X } from "lucide-react";
+import {
+  ArrowUpRight,
+  Baby,
+  HeartPulse,
+  Info,
+  Phone,
+  Search,
+  Smile,
+  X,
+} from "lucide-react";
 
 import PageWrapper from "../../layouts/page-wrapper";
 
@@ -53,8 +62,7 @@ const matches = (item, q) =>
 /* What to show: the active category, or every category filtered by search */
 function getGroups(categories, activeKey, q) {
   if (!q) {
-    const cat =
-      categories.find((c) => c.key === activeKey) ?? categories[0];
+    const cat = categories.find((c) => c.key === activeKey) ?? categories[0];
 
     return cat ? [{ ...cat, items: withIds(cat) }] : [];
   }
@@ -74,9 +82,7 @@ function HelpCard({ help, className = "" }) {
     <div
       className={`rounded-3xl bg-secondary-500 p-6 text-white sm:p-7 ${className}`}
     >
-      <h3 className="text-xl font-semibold tracking-tight">
-        {help.title}
-      </h3>
+      <h3 className="text-xl font-semibold tracking-tight">{help.title}</h3>
 
       <p className="mt-2 text-[0.9375rem] leading-relaxed text-white/70">
         {help.text}
@@ -107,20 +113,26 @@ function HelpCard({ help, className = "" }) {
   );
 }
 
+// category icons
+
+const FAQ_ICONS = {
+  HeartPulse,
+  Baby,
+  Smile,
+};
+
 /* ---------- section ---------- */
 
 export default function FaqSection({ categories = FAQS, content }) {
   const c = { ...DEFAULT_CONTENT, ...content };
   const baseId = useId();
 
-  const [activeKey, setActiveKey] = useState(
-    () => categories[0]?.key ?? ""
-  );
+  const [activeKey, setActiveKey] = useState(() => categories[0]?.key ?? "");
 
   const [query, setQuery] = useState("");
 
-  const [openId, setOpenId] = useState(
-    () => (categories[0] ? `${categories[0].key}-0` : null)
+  const [openId, setOpenId] = useState(() =>
+    categories[0] ? `${categories[0].key}-0` : null,
   );
 
   const q = query.trim().toLowerCase();
@@ -128,13 +140,10 @@ export default function FaqSection({ categories = FAQS, content }) {
 
   const groups = useMemo(
     () => getGroups(categories, activeKey, q),
-    [categories, activeKey, q]
+    [categories, activeKey, q],
   );
 
-  const resultCount = groups.reduce(
-    (sum, g) => sum + g.items.length,
-    0
-  );
+  const resultCount = groups.reduce((sum, g) => sum + g.items.length, 0);
 
   const active =
     categories.find((cat) => cat.key === activeKey) ?? categories[0];
@@ -171,11 +180,7 @@ export default function FaqSection({ categories = FAQS, content }) {
   const onSearch = (value) => {
     setQuery(value);
 
-    const next = getGroups(
-      categories,
-      activeKey,
-      value.trim().toLowerCase()
-    );
+    const next = getGroups(categories, activeKey, value.trim().toLowerCase());
 
     setOpenId(next[0]?.items[0]?.id ?? null);
   };
@@ -193,7 +198,6 @@ export default function FaqSection({ categories = FAQS, content }) {
       containerClassName="mx-auto grid gap-6 lg:grid-cols-[19rem_minmax(0,1fr)] lg:items-start lg:gap-12 xl:grid-cols-[21rem_minmax(0,1fr)] xl:gap-16"
     >
       {/* ---------- Sidebar: search, categories, help card ---------- */}
-
       <aside className="lg:sticky lg:top-28">
         <div className="relative">
           <label htmlFor={`${baseId}-search`} className="sr-only">
@@ -228,13 +232,12 @@ export default function FaqSection({ categories = FAQS, content }) {
         </div>
 
         {/* Desktop category list */}
-
         <nav
           aria-label="FAQ categories"
           className="mt-6 hidden flex-col gap-2 lg:flex"
         >
           {categories.map((cat) => {
-            const Icon = cat.icon;
+            const Icon = FAQ_ICONS[cat.icon] ?? HeartPulse;
             const on = !searching && cat.key === activeKey;
 
             return (
@@ -284,7 +287,6 @@ export default function FaqSection({ categories = FAQS, content }) {
 
       <div className="min-w-0">
         {/* Mobile category bar */}
-
         {!searching && (
           <nav
             aria-label="FAQ categories"
@@ -333,7 +335,6 @@ export default function FaqSection({ categories = FAQS, content }) {
         )}
 
         {/* Heading */}
-
         <div className="mt-6 lg:mt-0">
           {searching ? (
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -341,8 +342,8 @@ export default function FaqSection({ categories = FAQS, content }) {
                 className="text-2xl font-semibold tracking-tight text-secondary-500 sm:text-3xl"
                 aria-live="polite"
               >
-                {resultCount} {resultCount === 1 ? "result" : "results"} for
-                {" "}“{query.trim()}”
+                {resultCount} {resultCount === 1 ? "result" : "results"} for “
+                {query.trim()}”
               </h2>
 
               <button
@@ -357,7 +358,10 @@ export default function FaqSection({ categories = FAQS, content }) {
             active && (
               <div className="flex items-start gap-4">
                 <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary-50 text-primary-600">
-                  <active.icon className="h-6 w-6" aria-hidden />
+                  {(() => {
+                    const Icon = FAQ_ICONS[active.icon] ?? HeartPulse;
+                    return <Icon className="h-6 w-6" aria-hidden />;
+                  })()}
                 </span>
 
                 <div>
@@ -375,7 +379,6 @@ export default function FaqSection({ categories = FAQS, content }) {
         </div>
 
         {/* Questions */}
-
         {groups.length > 0 ? (
           <div className="mt-7 space-y-9">
             {groups.map((group) => (
@@ -418,8 +421,8 @@ export default function FaqSection({ categories = FAQS, content }) {
             </p>
 
             <p className="mx-auto mt-2 max-w-sm text-[0.9375rem] text-secondary-900">
-              Try a different word, or ask our care team directly. We are
-              here 24/7.
+              Try a different word, or ask our care team directly. We are here
+              24/7.
             </p>
 
             <button
@@ -432,9 +435,20 @@ export default function FaqSection({ categories = FAQS, content }) {
           </div>
         )}
 
-        <p className="mt-9 text-sm leading-relaxed text-secondary-900">
-          {c.disclaimer}
-        </p>
+        <div className="mt-9 flex items-start gap-3 rounded-2xl border border-primary-200/70 bg-primary-50/70 p-4 sm:p-5">
+          <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-primary-600 ring-1 ring-primary-200/70">
+            <Info className="h-4 w-4" aria-hidden />
+          </span>
+
+          <div>
+            <p className="text-sm font-semibold text-secondary-500">
+              Medical disclaimer
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-secondary-500/80">
+              {c.disclaimer}
+            </p>
+          </div>
+        </div>
 
         {/* Help card on mobile and tablet */}
 

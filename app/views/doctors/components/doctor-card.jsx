@@ -84,10 +84,7 @@ function DoctorCard({ doctor, linkLabel = "View Profile" }) {
 
             <div className="flex items-center gap-1.5">
               <dt className="sr-only">Available</dt>
-              <CalendarCheck
-                className="h-4 w-4 text-primary-600"
-                aria-hidden
-              />
+              <CalendarCheck className="h-4 w-4 text-primary-600" aria-hidden />
               <dd className="text-[13px] font-semibold text-secondary-500">
                 {availability}
               </dd>

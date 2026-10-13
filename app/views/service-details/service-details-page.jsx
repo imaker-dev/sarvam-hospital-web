@@ -82,7 +82,7 @@ const ServiceDetailsPage = ({ data }) => {
         <div>
           {/* Breadcrumb */}
 
-          <nav aria-label="Breadcrumb">
+          {/* <nav aria-label="Breadcrumb">
             <ol className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-sm text-secondary-900">
               <li>
                 <Link
@@ -112,7 +112,7 @@ const ServiceDetailsPage = ({ data }) => {
 
               <li aria-current="page">{data.title}</li>
             </ol>
-          </nav>
+          </nav> */}
 
           <div className="mt-6">
             <Eyebrow>{data.title}</Eyebrow>

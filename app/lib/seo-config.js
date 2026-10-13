@@ -1,4 +1,3 @@
-
 import { BASE_URL } from "../const";
 
 const SITE_NAME = "Sarvam Hospital";
@@ -16,10 +15,6 @@ const SITE_LOCALE = "en_IN";
 
 /**
  * Normalize a path for canonical URL generation.
- * Examples:
- * "/"             -> "/"
- * "/about/"       -> "/about"
- * "services"      -> "/services"
  */
 function normalizePath(path = "/") {
   const value = String(path).trim();
@@ -67,6 +62,7 @@ export function generateSEO({
   }
 
   const pageTitle = title.trim();
+
   const pageDescription =
     typeof description === "string" && description.trim()
       ? description.trim()
@@ -88,7 +84,8 @@ export function generateSEO({
   const shouldIndex = !noIndex;
   const shouldFollow = !noFollow;
 
-  return {
+  /** @type {import("next").Metadata} */
+  const metadata = {
     title: pageTitle,
     description: pageDescription,
 
@@ -157,4 +154,6 @@ export function generateSEO({
       ],
     },
   };
+
+  return metadata;
 }

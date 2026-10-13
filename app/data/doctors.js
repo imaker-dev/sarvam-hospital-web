@@ -7,19 +7,17 @@ export const doctors = [
       name: "Dr. Prashant Sagar",
       specialty: "Gynecology & Obstetrics",
       qualification: "MB.D.G.O",
-      experience: "10+ years",
+      experience: "16+ years",
       availability: "Mon – Sat",
-      timing: "11:00 AM – 2:00 PM | 5:00 PM – 7:00 PM",
+      timing: "10:00 AM – 1:30 PM | 5:00 PM – 7:30 PM",
       image: "/Images/Doctors/dr-prashant-card.webp",
     },
 
     details: {
       seo: {
         title: "Dr. Prashant Sagar | Gynecologist in Bharuch | Sarvam Hospital",
-
         description:
-          "Meet Dr. Prashant Sagar, an experienced gynecologist at Sarvam Hospital in Bharuch with 10+ years of experience in obstetrics, gynaecology, pregnancy, delivery and women's healthcare.",
-
+          "Meet Dr. Prashant Sagar, an experienced gynecologist at Sarvam Hospital in Bharuch with 16+ years of experience in obstetrics, gynaecology, pregnancy, delivery and women's healthcare.",
         keywords: [
           "Dr. Prashant Sagar",
           "Dr. Prashant Sagar Bharuch",
@@ -41,19 +39,15 @@ export const doctors = [
         title: "Dr. Prashant Sagar",
         specialty: "Gynecology & Obstetrics",
         description:
-          "Dr. Prashant Sagar is an experienced gynecologist providing personalised care for pregnancy, delivery, gynaecological conditions, infertility and women's health.",
-
+          "Dr. Prashant Sagar is an experienced gynecologist with 16+ years of experience, providing personalised care for pregnancy, delivery, gynaecological conditions, infertility and women's health.",
         image: "/Images/Doctors/dr-prashant-hero.webp",
       },
 
       about: {
         title: "About Dr. Prashant Sagar",
-
         paragraphs: [
-          "Dr. Prashant Sagar is a gynecologist with more than 10 years of experience in obstetrics and gynaecology, providing care for women through different stages of their reproductive and overall health.",
-
+          "Dr. Prashant Sagar is a gynecologist with more than 16 years of experience in obstetrics and gynaecology, providing care for women through different stages of their reproductive and overall health.",
           "His clinical areas include pregnancy and maternity care, normal and Caesarean delivery, gynaecological conditions, infertility treatment and selected gynaecological procedures.",
-
           "His areas of practice include normal, forceps and painless delivery, Caesarean section, hysterectomy, ovarian cystectomy, tubal ligation, MTP services, infertility treatment and ultrasound-related care.",
         ],
       },
@@ -69,7 +63,7 @@ export const doctors = [
         },
         {
           label: "Experience",
-          value: "10+ years",
+          value: "16+ years",
         },
         {
           label: "Working Days",
@@ -77,7 +71,7 @@ export const doctors = [
         },
         {
           label: "Consultation Hours",
-          value: "11:00 AM – 2:00 PM | 5:00 PM – 7:00 PM",
+          value: "10:00 AM – 1:30 PM | 5:00 PM – 7:30 PM",
         },
       ],
 
@@ -126,13 +120,10 @@ export const doctors = [
 
       appointment: {
         title: "Book an Appointment",
-
         description:
           "Schedule a consultation with Dr. Prashant Sagar for pregnancy, gynaecological, fertility and women's healthcare.",
-
         phone: "",
         email: "",
-
         cta: {
           label: "Book Appointment",
           href: "/contact",
@@ -155,19 +146,17 @@ export const doctors = [
       name: "Dr. Ameeta Sagar",
       specialty: "Pediatrics",
       qualification: "MD.Ped.",
-      experience: "10+ years",
+      experience: "16+ years",
       availability: "Mon – Sat",
-      timing: "10:00 AM – 1:00 PM | 5:00 PM – 7:00 PM",
+      timing: "11:00 AM – 1:00 PM | 5:00 PM – 7:00 PM",
       image: "/Images/Doctors/dr-ameeta-card.webp",
     },
 
     details: {
       seo: {
         title: "Dr. Ameeta Sagar | Pediatrician in Bharuch | Sarvam Hospital",
-
         description:
-          "Meet Dr. Ameeta Sagar, an experienced pediatrician at Sarvam Hospital in Bharuch with 10+ years of experience in child healthcare, newborn care, vaccination and paediatric services.",
-
+          "Meet Dr. Ameeta Sagar, an experienced pediatrician at Sarvam Hospital in Bharuch with 16+ years of experience in child healthcare, newborn care, vaccination and paediatric services.",
         keywords: [
           "Dr. Ameeta Sagar",
           "Dr. Ameeta Sagar Bharuch",
@@ -188,21 +177,16 @@ export const doctors = [
       hero: {
         title: "Dr. Ameeta Sagar",
         specialty: "Pediatrics",
-
         description:
-          "Dr. Ameeta Sagar is an experienced pediatrician providing personalised healthcare for newborns, infants and children, including routine consultations, vaccination and newborn care.",
-
+          "Dr. Ameeta Sagar is an experienced pediatrician with 16+ years of experience, providing personalised healthcare for newborns, infants and children, including routine consultations, vaccination and newborn care.",
         image: "/Images/Doctors/dr-ameeta-hero.webp",
       },
 
       about: {
         title: "About Dr. Ameeta Sagar",
-
         paragraphs: [
-          "Dr. Ameeta Sagar is a pediatrician with more than 10 years of experience in child healthcare, providing care for newborns, infants and children.",
-
+          "Dr. Ameeta Sagar is a pediatrician with more than 16 years of experience in child healthcare, providing care for newborns, infants and children.",
           "Her clinical care includes paediatric consultations, newborn assessment, vaccination and medical support for children at different stages of growth and development.",
-
           "She also provides paediatric support around the time of delivery and newborn care as part of the hospital's woman and child healthcare services.",
         ],
       },
@@ -218,7 +202,7 @@ export const doctors = [
         },
         {
           label: "Experience",
-          value: "10+ years",
+          value: "16+ years",
         },
         {
           label: "Working Days",
@@ -226,7 +210,7 @@ export const doctors = [
         },
         {
           label: "Consultation Hours",
-          value: "10:00 AM – 1:00 PM | 5:00 PM – 7:00 PM",
+          value: "11:00 AM – 1:00 PM | 5:00 PM – 7:00 PM",
         },
       ],
 
@@ -261,13 +245,10 @@ export const doctors = [
 
       appointment: {
         title: "Book an Appointment",
-
         description:
           "Schedule a consultation with Dr. Ameeta Sagar for newborn, paediatric and child healthcare.",
-
         phone: "",
         email: "",
-
         cta: {
           label: "Book Appointment",
           href: "/contact",

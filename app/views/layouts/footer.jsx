@@ -1,4 +1,5 @@
-import { ArrowUpRight, Baby, Clock, Mail, MapPin, Phone } from "lucide-react";
+import { ChevronRight, Clock, Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
 import PageWrapper from "./page-wrapper";
 import { BRAND_LOGO, CONTACT_INFO } from "@/app/const";
 import {
@@ -7,23 +8,24 @@ import {
   XIcon,
   YoutubeIcon,
 } from "@/app/icons/social-icons";
-import Link from "next/link";
+import { getServicesNav } from "@/app/data/services";
 
 /* ------------------------------------------------------------------ */
 /* Centralized content. Pass `content` to override any key.            */
 /* ------------------------------------------------------------------ */
+
+const serviceLinks = getServicesNav().map(({ slug, title }) => ({
+  label: title,
+  href: `/services/${slug}`,
+}));
+
 const DEFAULT_CONTENT = {
   brand: {
     name: "Sarvam",
     href: "/",
+    heading: "About us",
     description:
       "A hospital dedicated to the health of women and children, with caring specialists and round-the-clock emergency care.",
-  },
-  cta: {
-    title: "Schedule your consultation today",
-    description: "We are open 24/7, every day of the year.",
-    label: "Book an appointment",
-    href: `${CONTACT_INFO.phone}`,
   },
   socials: [
     {
@@ -46,19 +48,15 @@ const DEFAULT_CONTENT = {
         { label: "Home", href: "/" },
         { label: "About us", href: "/about" },
         { label: "Our doctors", href: "/doctors" },
-        { label: "Blog", href: "/blog" },
+        { label: "Gallery", href: "/gallery" },
+        { label: "Testimonials", href: "/testimonials" },
+        { label: "FAQs", href: "/faq" },
         { label: "Contact us", href: "/contact" },
       ],
     },
     {
       title: "Services",
-      links: [
-        { label: "Maternity care", href: "/services/maternity" },
-        { label: "Prenatal scans", href: "/services/prenatal" },
-        { label: "Gynecology", href: "/services/gynecology" },
-        { label: "Fertility & IVF", href: "/services/ivf" },
-        { label: "Pediatrics", href: "/services/pediatrics" },
-      ],
+      links: serviceLinks,
     },
   ],
   contact: {
@@ -92,17 +90,12 @@ const DEFAULT_CONTENT = {
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500";
 
-const linkCls = `text-[0.9375rem] text-white/70 hover:text-primary-500 ${focusRing}`;
-const headingCls = "text-base font-semibold text-white";
-
-function Logo({ brand }) {
+/* Heading with a hairline separator and a short teal accent on it */
+function ColumnHeading({ children }) {
   return (
-    <Link
-      href={brand.href}
-      className={`inline-flex items-center gap-2.5 ${focusRing}`}
-    >
-      <img src={BRAND_LOGO} alt="logo" className="w-14" />
-    </Link>
+    <h3 className="relative border-b border-secondary-500/15 pb-4 text-base font-semibold text-secondary-500 after:absolute after:-bottom-px after:left-0 after:h-0.5 after:w-12 after:rounded-full after:bg-primary-500">
+      {children}
+    </h3>
   );
 }
 
@@ -110,88 +103,135 @@ export default function Footer({ content }) {
   const c = { ...DEFAULT_CONTENT, ...content };
 
   return (
-    <PageWrapper as="footer" className="bg-secondary-500">
-      {/* ---------- Link grid ---------- */}
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_1fr_1.4fr] lg:gap-12">
-        <div className="sm:col-span-2 lg:col-span-1">
-          <Logo brand={c.brand} />
-          <p className="mt-5 max-w-xs text-[0.9375rem] leading-relaxed text-white/70">
-            {c.brand.description}
-          </p>
+    <footer className="relative isolate overflow-hidden bg-gradient-to-b from-[#F3F5F8] to-[#E9EDF2] text-secondary-500">
+      {/* Hairline of teal light along the top edge */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"
+      />
 
-          <ul className="mt-6 flex gap-3">
-            {c.socials.map(({ label, icon: Icon, href }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  aria-label={label}
-                  className={`grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white hover:border-primary-500 hover:text-primary-500 ${focusRing}`}
-                >
-                  <Icon className="h-[18px] w-[18px]" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+      {/* ---------- Columns ---------- */}
+      <PageWrapper as="div">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1.4fr] lg:gap-10 xl:gap-14">
+          {/* About */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <ColumnHeading>{c.brand.heading}</ColumnHeading>
 
-        {c.columns.map((col) => (
-          <nav key={col.title} aria-label={col.title}>
-            <h3 className={headingCls}>{col.title}</h3>
-            <ul className="mt-5 space-y-3.5">
-              {col.links.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className={linkCls}>
-                    {link.label}
+            <Link
+              href={c.brand.href}
+              aria-label={c.brand.name}
+              className={`mt-6 inline-block rounded-full ${focusRing}`}
+            >
+              <img
+                src={BRAND_LOGO}
+                alt=""
+                className="h-16 w-16 object-contain"
+              />
+            </Link>
+            <p className="mt-4 max-w-xs text-[0.9375rem] leading-relaxed text-secondary-500/75">
+              {c.brand.description}
+            </p>
+
+            <ul className="mt-6 flex gap-2.5">
+              {c.socials.map(({ label, icon: Icon, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`grid h-10 w-10 place-items-center rounded-xl border border-secondary-500/10 bg-white text-secondary-500 shadow-sm transition-colors hover:border-primary-500 hover:text-primary-600 ${focusRing}`}
+                  >
+                    <Icon className="h-[18px] w-[18px]" />
                   </a>
                 </li>
               ))}
             </ul>
-          </nav>
-        ))}
+          </div>
 
-        <div className="sm:col-span-2 lg:col-span-1">
-          <h3 className={headingCls}>{c.contact.title}</h3>
-          <ul className="mt-5 space-y-4">
-            {c.contact.items.map(({ icon: Icon, text, href }) => (
+          {/* Link columns */}
+          <div className="col-span-2 grid grid-cols-2 gap-x-5 sm:gap-x-8 lg:col-span-2 lg:contents">
+            {c.columns.map((col) => (
+              <nav key={col.title} aria-label={col.title}>
+                <ColumnHeading>{col.title}</ColumnHeading>
+                <ul className="mt-6 space-y-3.5">
+                  {col.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className={`group flex items-center text-[0.9375rem] text-secondary-500/75 transition-colors hover:text-primary-600 ${focusRing}`}
+                      >
+                        <ChevronRight
+                          className="h-3.5 w-0 shrink-0 text-primary-500 opacity-0 transition-all duration-200 group-hover:w-3.5 group-hover:opacity-100 motion-reduce:transition-none"
+                          aria-hidden
+                        />
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
+          </div>
+
+          {/* Contact */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <ColumnHeading>{c.contact.title}</ColumnHeading>
+            <ul className="mt-2">
+              {c.contact.items.map(({ icon: Icon, text, href }) => (
+                <li
+                  key={text}
+                  className="flex items-start gap-3.5 py-2 text-[0.9375rem] leading-snug text-secondary-500/80"
+                >
+                  <Icon
+                    className="mt-1 h-4 w-4 shrink-0 text-primary-600"
+                    aria-hidden
+                  />
+                  {href ? (
+                    <a
+                      href={href}
+                      className={`transition-colors hover:text-primary-600 ${focusRing}`}
+                    >
+                      {text}
+                    </a>
+                  ) : (
+                    <span>{text}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </PageWrapper>
+
+      {/* ---------- Bottom bar (slightly darker band) ---------- */}
+      <div className="border-t border-secondary-500/10 bg-secondary-500/[0.04]">
+        <PageWrapper
+          as="div"
+          paddingY="py-5"
+          containerClassName="flex flex-col items-center gap-3 text-center text-sm text-secondary-500/70 sm:flex-row sm:justify-between sm:text-left"
+        >
+          <p>
+            © {new Date().getFullYear()} {c.brand.name}. All rights reserved.
+          </p>
+
+          <ul className="flex flex-wrap items-center justify-center">
+            {c.legal.map((l) => (
               <li
-                key={text}
-                className="flex items-start gap-3 text-[0.9375rem] leading-snug text-white/70"
+                key={l.label}
+                className="border-l border-secondary-500/15 px-4 first:border-l-0 first:pl-0 last:pr-0"
               >
-                <Icon
-                  className="mt-0.5 h-[18px] w-[18px] shrink-0 text-primary-500"
-                  aria-hidden
-                />
-                {href ? (
-                  <a
-                    href={href}
-                    className={`hover:text-primary-500 ${focusRing}`}
-                  >
-                    {text}
-                  </a>
-                ) : (
-                  <span>{text}</span>
-                )}
+                <Link
+                  href={l.href}
+                  className={`transition-colors hover:text-primary-600 ${focusRing}`}
+                >
+                  {l.label}
+                </Link>
               </li>
             ))}
           </ul>
-        </div>
+        </PageWrapper>
       </div>
-
-      {/* ---------- Bottom bar ---------- */}
-      <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/55 sm:flex-row sm:items-center sm:justify-between lg:mt-14">
-        <p>
-          © {new Date().getFullYear()} {c.brand.name}. All rights reserved.
-        </p>
-        <ul className="flex flex-wrap gap-x-6 gap-y-2">
-          {c.legal.map((l) => (
-            <li key={l.label}>
-              <a href={l.href} className={`hover:text-white ${focusRing}`}>
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </PageWrapper>
+    </footer>
   );
 }
