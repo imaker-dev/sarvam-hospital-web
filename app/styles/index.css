@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@import "./additional-styles/cursor.css";
+@import "./additional-styles/button.css";
+
+
+/* =========================================================
+   THEME
+   ========================================================= */
+
+@theme {
+
+  /* ---------------------------------------------------------
+     FONTS
+     --------------------------------------------------------- */
+
+  --font-sans: var(--font-onest), sans-serif;
+  --font-body: var(--font-onest), sans-serif;
+  --font-heading: var(--font-onest), sans-serif;
+
+/* ---------------------------------------------------------
+   PRIMARY — MEDICAL TEAL
+   Primary 500: #04949F
+   --------------------------------------------------------- */
+
+--color-primary-50:  #F0FAFA;
+--color-primary-100: #D9F2F3;
+--color-primary-200: #B7E5E7;
+--color-primary-300: #83D1D5;
+--color-primary-400: #43B5BC;
+--color-primary-500: #04949F;
+--color-primary-600: #047C85;
+--color-primary-700: #06656C;
+--color-primary-800: #085258;
+--color-primary-900: #0A454A;
+--color-primary-950: #042B2F;
+
+
+/* ---------------------------------------------------------
+   SECONDARY — DEEP ROYAL BLUE
+   Secondary 500: #023576
+   --------------------------------------------------------- */
+
+--color-secondary-50:  #F1F6FC;
+--color-secondary-100: #E2ECF8;
+--color-secondary-200: #C5D9F0;
+--color-secondary-300: #9ABDE3;
+--color-secondary-400: #669BD2;
+--color-secondary-500: #023576;
+--color-secondary-600: #022D65;
+--color-secondary-700: #022653;
+--color-secondary-800: #032044;
+--color-secondary-900: #041B38;
+--color-secondary-950: #020F21;
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+@layer base {
+
+  body {
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+}

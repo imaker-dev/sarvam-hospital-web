@@ -1,0 +1,54 @@
+/* Outer: only moves (position set by JS) */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 13px;
+  height: 13px;
+
+  pointer-events: none;
+  z-index: 999999;
+  will-change: transform;
+}
+
+/* Inner: only scales and fades */
+.cursor-dot-inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  /* background: #ed9292; */
+  background: var(--color-primary-400);
+  border-radius: 50%;
+
+  opacity: 0;
+  transform: scale(1);
+  transform-origin: center;
+
+  /* Leaving a link/button: grow back */
+  transition:
+    transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 200ms ease;
+}
+
+.cursor-dot.is-visible .cursor-dot-inner {
+  opacity: 1;
+}
+
+/* Hovering a link/button: squeeze in place, then fade at the end */
+.cursor-dot.is-visible.is-interactive .cursor-dot-inner {
+  transform: scale(0.1);
+  opacity: 0;
+
+  transition:
+    transform 350ms cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 120ms ease 230ms;
+}
+
+@media (hover: none),
+(pointer: coarse) {
+  .cursor-dot {
+    display: none;
+  }
+}
