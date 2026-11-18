@@ -19,7 +19,7 @@ import PageWrapper from "../layouts/page-wrapper";
 
 import { Eyebrow } from "../layouts/section-header";
 
-import { CONTACT_INFO } from "@/app/const";
+import { APPOINTMENT_URL, CONTACT_INFO } from "@/app/const";
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500";
@@ -278,10 +278,11 @@ const ServiceDetailsPage = ({ data }) => {
 
               <Link
                 href="/contact"
-                className="group mt-5 inline-flex h-12 w-full items-center justify-between rounded-full bg-primary-300 pl-6 pr-2 text-sm font-semibold text-secondary-500 hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-300"
+                className="btn mt-5 btn-primary w-full"
+                // className="group mt-5 inline-flex h-12 w-full items-center justify-between rounded-full bg-primary-300 pl-6 pr-2 text-sm font-semibold text-secondary-500 hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-300"
               >
                 Talk to us
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-secondary-500/10">
+                <span className="btn-icon">
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </span>
               </Link>
@@ -391,15 +392,15 @@ const ServiceDetailsPage = ({ data }) => {
                   )}
 
                   <div className="mt-auto pt-6">
-                    <Link
-                      href="/appointment"
+                    <a
+                      href={APPOINTMENT_URL}
                       className={`inline-flex items-center gap-2.5 text-sm font-semibold text-secondary-500 hover:text-primary-600 ${focusRing}`}
                     >
                       Consult a specialist
                       <span className="grid h-7 w-7 place-items-center rounded-full bg-secondary-500 text-white group-hover:bg-primary-600">
                         <ArrowUpRight className="h-4 w-4" aria-hidden />
                       </span>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -429,20 +430,14 @@ const ServiceDetailsPage = ({ data }) => {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/appointment"
-                className="group inline-flex h-12 items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-primary-300 pl-6 pr-2 text-[0.9375rem] font-semibold text-secondary-500 hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-300"
-              >
+              <Link href="/appointment" className="btn btn-primary">
                 Book Appointment
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-secondary-500/10">
+                <span className="btn-icon">
                   <ArrowUpRight className="h-4 w-4" aria-hidden />
                 </span>
               </Link>
 
-              <a
-                href={`tel:${CONTACT_INFO.phone}`}
-                className="inline-flex h-12 items-center justify-center gap-2.5 whitespace-nowrap rounded-full border border-white/25 px-6 text-[0.9375rem] font-semibold text-white hover:border-primary-300 hover:text-primary-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-300"
-              >
+              <a href={`tel:${CONTACT_INFO.phone}`} className="btn btn-outline">
                 <Phone className="h-4 w-4" aria-hidden />
                 Call Us
               </a>

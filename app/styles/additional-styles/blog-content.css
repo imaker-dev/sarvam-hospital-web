@@ -1,38 +1,60 @@
-/* ------------------------------------------------------------------ */
-/* Styles for the HTML content of a blog post (Quill or any editor).   */
-/* Everything is scoped to .blog-content, so it never leaks.           */
-/* Imported by BlogDetailsPage.jsx.                                    */
-/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+   SARVAM HOSPITAL — BLOG CONTENT
+   Premium, responsive rich-text styling for Quill and other editors.
+   Colors are driven by the global --color-primary-* / --color-secondary-*
+   CSS variables, with fallbacks for safe rendering.
+   ------------------------------------------------------------------ */
 
 .blog-content {
-  color: #5b4663;
+  /* Semantic theme tokens: update the global palette to recolor content. */
+  --blog-text: var(--color-secondary-700, #022653);
+  --blog-heading: var(--color-secondary-500, #023576);
+  --blog-link: var(--color-primary-600, #047C85);
+  --blog-link-hover: var(--color-secondary-600, #022D65);
+  --blog-accent: var(--color-primary-500, #04949F);
+  --blog-surface: var(--color-primary-50, #F0FAFA);
+  --blog-surface-alt: var(--color-secondary-50, #F1F6FC);
+  --blog-border: var(--color-secondary-200, #C5D9F0);
+  --blog-code-bg: var(--color-secondary-900, #041B38);
+  --blog-code-text: var(--color-secondary-100, #E2ECF8);
+
+  min-width: 0;
+  color: var(--blog-text);
   font-size: 1.0625rem;
   line-height: 1.85;
   overflow-wrap: anywhere;
+  word-break: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+.blog-content *,
+.blog-content *::before,
+.blog-content *::after {
+  box-sizing: border-box;
 }
 
 .blog-content ::selection {
-  background: rgba(204, 107, 112, 0.25);
+  color: var(--blog-heading);
+  background: color-mix(in srgb, var(--blog-accent) 22%, transparent);
 }
 
-.blog-content > :first-child {
+.blog-content> :first-child {
   margin-top: 0;
 }
 
 /* Paragraphs */
 .blog-content p {
-  margin: 1.25rem 0 0;
+  margin: 1.2rem 0 0;
 }
 
-/* Lead paragraph: the first paragraph reads as an intro */
-.blog-content > p:first-child {
-  color: #35183f;
+.blog-content>p:first-child {
+  color: var(--blog-heading);
   font-size: 1.1875rem;
   font-weight: 500;
   line-height: 1.75;
 }
 
-/* Quill emits <p><br></p> for blank lines: keep them as a small gap only */
+/* Quill may emit <p><br></p> for an empty line. */
 .blog-content p:has(> br:only-child) {
   margin: 0;
   line-height: 0.75;
@@ -42,23 +64,23 @@
 .blog-content h2,
 .blog-content h3,
 .blog-content h4 {
-  color: #35183f;
-  font-weight: 600;
+  color: var(--blog-heading);
+  font-weight: 650;
   letter-spacing: -0.02em;
+  line-height: 1.3;
   text-wrap: balance;
 }
 
 .blog-content h2 {
   margin: 3rem 0 0;
-  font-size: 1.625rem;
+  font-size: 1.75rem;
   line-height: 1.2;
   scroll-margin-top: 7rem;
 }
 
 .blog-content h3 {
-  margin: 2rem 0 0;
-  font-size: 1.3125rem;
-  line-height: 1.3;
+  margin: 2.1rem 0 0;
+  font-size: 1.375rem;
   scroll-margin-top: 7rem;
 }
 
@@ -68,18 +90,17 @@
   line-height: 1.4;
 }
 
-/* a heading right after a blank spacer should not double its gap */
-.blog-content p:has(> br:only-child) + h2,
-.blog-content p:has(> br:only-child) + h3,
-.blog-content p:has(> br:only-child) + h4 {
+.blog-content p:has(> br:only-child)+h2,
+.blog-content p:has(> br:only-child)+h3,
+.blog-content p:has(> br:only-child)+h4 {
   margin-top: 1.5rem;
 }
 
 /* Lists */
 .blog-content ul,
 .blog-content ol {
-  margin: 1.25rem 0 0;
-  padding-left: 1.5rem;
+  margin: 1.2rem 0 0;
+  padding-left: 1.6rem;
 }
 
 .blog-content ul {
@@ -91,109 +112,128 @@
 }
 
 .blog-content li {
-  margin-top: 0.75rem;
+  margin-top: 0.65rem;
   padding-left: 0.25rem;
 }
 
 .blog-content li::marker {
-  color: #cc6b70;
-  font-weight: 600;
+  color: var(--blog-accent);
+  font-weight: 700;
 }
 
-.blog-content li > p {
+.blog-content li>p {
+  margin-top: 0.45rem;
+}
+
+.blog-content li>ul,
+.blog-content li>ol {
   margin-top: 0.5rem;
 }
 
-.blog-content li > ul,
-.blog-content li > ol {
-  margin-top: 0.5rem;
-}
-
-/* Inline */
+/* Inline formatting and links */
 .blog-content strong,
 .blog-content b {
-  color: #35183f;
-  font-weight: 600;
+  color: var(--blog-heading);
+  font-weight: 650;
 }
 
 .blog-content a {
-  color: #cc6b70;
-  text-decoration: underline;
+  color: var(--blog-link);
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--blog-link) 45%, transparent);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  transition: color 0.2s ease;
+  border-radius: 0.15rem;
+  overflow-wrap: anywhere;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
 }
 
 .blog-content a:hover {
-  color: #35183f;
+  color: var(--blog-link-hover);
+  text-decoration-color: currentColor;
 }
 
 .blog-content a:focus-visible {
-  outline: 2px solid #cc6b70;
+  outline: 2px solid var(--blog-accent);
   outline-offset: 3px;
-  border-radius: 0.25rem;
 }
 
-.blog-content code {
+/* Inline code */
+.blog-content :not(pre)>code {
   padding: 0.15rem 0.45rem;
-  border-radius: 0.5rem;
-  background: #fbf1f0;
-  color: #35183f;
+  border: 1px solid color-mix(in srgb, var(--blog-accent) 16%, transparent);
+  border-radius: 0.45rem;
+  background: var(--blog-surface);
+  color: var(--blog-heading);
   font-size: 0.9em;
+  overflow-wrap: anywhere;
 }
 
-/* Code blocks (Quill uses .ql-syntax) */
+/* Code blocks, including Quill's .ql-syntax */
 .blog-content pre,
 .blog-content .ql-syntax {
+  max-width: 100%;
   margin: 1.75rem 0 0;
-  padding: 1.25rem 1.5rem;
-  overflow-x: auto;
-  border-radius: 1.25rem;
-  background: #35183f;
-  color: #fbf1f0;
+  padding: 1.25rem 1.4rem;
+  overflow: auto;
+  border: 1px solid color-mix(in srgb,
+      var(--color-secondary-400, #669BD2) 22%,
+      transparent);
+  border-radius: 1.125rem;
+  background: var(--blog-code-bg);
+  color: var(--blog-code-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.875rem;
-  line-height: 1.7;
+  line-height: 1.75;
   white-space: pre;
+  tab-size: 2;
+  -webkit-overflow-scrolling: touch;
 }
 
-.blog-content pre code {
+.blog-content pre code,
+.blog-content .ql-syntax code {
   padding: 0;
-  background: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: inherit;
   font-size: inherit;
+  overflow-wrap: normal;
 }
 
-/* Quote */
+/* Quotes */
 .blog-content blockquote {
   margin: 2rem 0 0;
   padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-  border-left: 4px solid #cc6b70;
-  border-radius: 0 1.5rem 1.5rem 0;
-  background: #fbf1f0;
-  color: #35183f;
+  border: 0;
+  border-left: 4px solid var(--blog-accent);
+  border-radius: 0 1.125rem 1.125rem 0;
+  background: linear-gradient(120deg, var(--blog-surface), var(--blog-surface-alt));
+  color: var(--blog-heading);
   font-size: 1.125rem;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .blog-content blockquote p {
   margin: 0;
 }
 
-.blog-content blockquote p + p {
+.blog-content blockquote p+p {
   margin-top: 0.75rem;
 }
 
-/* Media */
+/* Images and figures */
 .blog-content img {
   display: block;
   max-width: 100%;
   height: auto;
   margin: 2rem auto 0;
-  border-radius: 1.5rem;
+  border-radius: 1.125rem;
 }
 
 .blog-content figure {
+  max-width: 100%;
   margin: 2rem 0 0;
 }
 
@@ -203,11 +243,14 @@
 
 .blog-content figcaption {
   margin-top: 0.75rem;
-  color: #5b4663;
+  color: var(--blog-text);
   font-size: 0.875rem;
+  line-height: 1.6;
   text-align: center;
+  opacity: 0.82;
 }
 
+/* Embedded media */
 .blog-content iframe,
 .blog-content video {
   display: block;
@@ -216,21 +259,26 @@
   margin: 2rem 0 0;
   aspect-ratio: 16 / 9;
   border: 0;
-  border-radius: 1.5rem;
+  border-radius: 1.125rem;
+}
+
+.blog-content video {
+  height: auto;
 }
 
 /* Divider */
 .blog-content hr {
   margin: 2.5rem 0;
   border: 0;
-  border-top: 1px solid rgba(53, 24, 63, 0.1);
+  border-top: 1px solid color-mix(in srgb, var(--blog-heading) 16%, transparent);
 }
 
-/* Tables scroll sideways on small screens */
+/* Tables: retain table layout inside a scrollable content region. */
 .blog-content table {
   display: block;
   width: 100%;
-  margin-top: 2rem;
+  max-width: 100%;
+  margin: 2rem 0 0;
   overflow-x: auto;
   border-collapse: collapse;
   font-size: 0.9375rem;
@@ -239,45 +287,51 @@
 
 .blog-content th,
 .blog-content td {
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(53, 24, 63, 0.12);
+  min-width: 7rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--blog-border);
   text-align: left;
+  vertical-align: top;
 }
 
 .blog-content th {
-  background: #fbf1f0;
-  color: #35183f;
-  font-weight: 600;
-  white-space: nowrap;
+  background: var(--color-secondary-100, #E2ECF8);
+  color: var(--blog-heading);
+  font-weight: 650;
 }
 
 .blog-content tbody tr:nth-child(even) td {
-  background: rgba(251, 241, 240, 0.45);
+  background: color-mix(in srgb, var(--blog-surface) 72%, white);
 }
 
-/* Quill editor classes */
+/* Quill alignment and indentation */
 .blog-content .ql-align-center {
   text-align: center;
 }
+
 .blog-content .ql-align-right {
   text-align: right;
 }
+
 .blog-content .ql-align-justify {
   text-align: justify;
 }
+
 .blog-content .ql-indent-1 {
   padding-left: 3rem;
 }
+
 .blog-content .ql-indent-2 {
   padding-left: 6rem;
 }
+
 .blog-content .ql-indent-3 {
   padding-left: 9rem;
 }
 
-/* Larger screens: slightly bigger type */
+/* Larger screens */
 @media (min-width: 640px) {
-  .blog-content > p:first-child {
+  .blog-content>p:first-child {
     font-size: 1.25rem;
   }
 
@@ -286,7 +340,7 @@
   }
 
   .blog-content h3 {
-    font-size: 1.375rem;
+    font-size: 1.4375rem;
   }
 
   .blog-content blockquote {
@@ -295,15 +349,52 @@
   }
 }
 
-/* Small phones: reduce the deep Quill indents so text keeps room */
+/* Phones */
 @media (max-width: 479px) {
+  .blog-content {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .blog-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .blog-content h3 {
+    font-size: 1.2rem;
+  }
+
   .blog-content .ql-indent-1 {
     padding-left: 1.5rem;
   }
+
   .blog-content .ql-indent-2 {
     padding-left: 3rem;
   }
+
   .blog-content .ql-indent-3 {
     padding-left: 4.5rem;
+  }
+
+  .blog-content blockquote {
+    padding: 1rem 1rem 1rem 1.125rem;
+  }
+
+  .blog-content pre,
+  .blog-content .ql-syntax {
+    padding: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .blog-content th,
+  .blog-content td {
+    padding: 0.65rem 0.75rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .blog-content a {
+    transition: none;
   }
 }

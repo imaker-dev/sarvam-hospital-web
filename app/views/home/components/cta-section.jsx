@@ -4,7 +4,6 @@ import { APPOINTMENT_URL, CONTACT_INFO } from "@/app/const";
 import PageWrapper from "../../layouts/page-wrapper";
 import SectionHeader from "../../layouts/section-header";
 
-
 const telHref = (p = "") => `tel:${String(p).replace(/[^\d+]/g, "")}`;
 
 /* ---------- illustration: phone, heart + heartbeat, chat, calendar ---------- */
@@ -194,10 +193,10 @@ function CareIllustration({ className = "" }) {
 
 /* ---------- section ---------- */
 export default function CtaSection({
-  title = "Expert care is just a call away",
-  highlight = "a call away",
+  title = "Expert Care for Every Step of Your Journey",
+  highlight = "Every Step of Your Journey",
   description = "Speak to our team or book a visit with a specialist. We are open 24 hours, every day, and happy to help you take the next step.",
-  appointmentLabel = "Book an appointment",
+  appointmentLabel = "Book Appointment",
   appointmentHref = APPOINTMENT_URL,
   phone = CONTACT_INFO?.phone,
 }) {
@@ -240,7 +239,10 @@ export default function CtaSection({
             />
 
             <div className="flex flex-col gap-3.5 sm:flex-row sm:items-center sm:gap-4">
-              <Link href={appointmentHref} className="btn btn-lg btn-primary">
+              <Link
+                href={appointmentHref}
+                className="btn btn-lg btn-primary w-full justify-between sm:w-auto"
+              >
                 <span className="flex items-center gap-2.5">
                   <CalendarCheck className="h-[18px] w-[18px]" aria-hidden />
                   {appointmentLabel}
@@ -250,7 +252,10 @@ export default function CtaSection({
                 </span>
               </Link>
 
-              <a href={telHref(phone)} className="btn btn-lg btn-outline">
+              <a
+                href={telHref(phone)}
+                className="btn btn-lg btn-outline w-full justify-center sm:w-auto"
+              >
                 <Phone className="h-[18px] w-[18px]" aria-hidden />
                 Call now
               </a>

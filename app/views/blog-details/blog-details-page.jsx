@@ -1,9 +1,10 @@
 "use client";
-
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
+
 import {
-  ArrowLeft,
   ArrowUpRight,
   CalendarDays,
   Check,
@@ -19,11 +20,16 @@ import {
   Share2,
   Tag,
 } from "lucide-react";
+
 import { CONTACT_INFO } from "@/app/const";
+
 import "../../styles/additional-styles/blog-content.css";
+
 import PageWrapper from "../layouts/page-wrapper";
+
 import { Avatar, formatDate } from "../blogs/components/blog-card";
-import SectionHeader, { Eyebrow } from "../layouts/section-header";
+
+import { Eyebrow } from "../layouts/section-header";
 
 /* ------------------------------------------------------------------ */
 /* Blog details page:  <BlogDetailsPage blog={blog} basePath="/blogs" /> */
@@ -32,63 +38,59 @@ import SectionHeader, { Eyebrow } from "../layouts/section-header";
 /* The HTML `content` is rendered inside .blog-content and styled by   */
 /* blog-content.css. Only render HTML you control (your own editor).   */
 /* The "On this page" list is built from the <h2> tags in the content. */
+
 /* ------------------------------------------------------------------ */
-
 const focusRing =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#CC6B70]";
-
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500";
 /* keeps "+" so international numbers dial correctly */
 const telHref = (p = "") => `tel:${String(p).replace(/[^\d+]/g, "")}`;
-
 const slugify = (s) =>
   s
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
-
 const stripTags = (s) =>
   s
     .replace(/<[^>]*>/g, "")
     .replace(/&nbsp;/g, " ")
     .replace(/&amp;/g, "&")
     .trim();
-
 /* Adds an id to every <h2> and returns the headings for the table of contents */
 function prepareContent(html = "") {
   const headings = [];
   const used = new Set();
-
   const out = html.replace(
     /<h2([^>]*)>([\s\S]*?)<\/h2>/gi,
     (match, attrs, inner) => {
       const text = stripTags(inner);
       const existing = /id\s*=\s*["']([^"']+)["']/i.exec(attrs);
-      const base = existing ? existing[1] : slugify(text) || "section";
-
+      const base = (existing ? existing[1] : slugify(text)) || "section";
       let id = base;
       let n = 2;
       while (used.has(id)) id = `${base}-${n++}`;
       used.add(id);
-
       headings.push({ id, text });
-      return existing ? match : `<h2${attrs} id="${id}">${inner}</h2>`;
+      // Preserve existing IDs when unique; repair duplicates when necessary.
+      if (existing && existing[1] === id) return match;
+      const nextAttrs = existing
+        ? attrs.replace(existing[0], `id="${id}"`)
+        : `${attrs} id="${id}"`;
+      return `<h2${nextAttrs}>${inner}</h2>`;
     },
   );
-
   return { html: out, headings };
 }
 
 /* ---------- small pieces ---------- */
+
 function ShareCard({ title, className = "" }) {
   const [url, setUrl] = useState("");
   const [copied, setCopied] = useState(false);
   const [canShare, setCanShare] = useState(false);
-
   useEffect(() => {
     setUrl(window.location.href.split("#")[0]);
     setCanShare(typeof navigator !== "undefined" && !!navigator.share);
   }, []);
-
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(url);
@@ -96,20 +98,17 @@ function ShareCard({ title, className = "" }) {
       setTimeout(() => setCopied(false), 2000);
     } catch {}
   };
-
   const nativeShare = async () => {
     try {
       await navigator.share({ title, url });
     } catch {}
   };
-
-  const btn = `grid h-11 w-11 place-items-center rounded-full border border-[#35183F]/12 bg-white text-[#35183F] transition-colors hover:border-[#CC6B70] hover:text-[#CC6B70] ${focusRing}`;
-
+  const btn = `grid h-11 w-11 place-items-center rounded-full border border-secondary-500/12 bg-white text-secondary-500 transition-colors hover:border-primary-600 hover:text-primary-600 ${focusRing}`;
   return (
     <div
-      className={`rounded-3xl border border-[#35183F]/8 bg-white p-5 ${className}`}
+      className={`rounded-3xl border border-secondary-500/8 bg-white p-5 ${className}`}
     >
-      <p className="text-sm font-semibold text-[#35183F]">Share this article</p>
+      <p className="text-sm font-semibold text-secondary-500">Share this article</p>
       <div className="mt-3.5 flex flex-wrap items-center gap-2.5">
         <button
           type="button"
@@ -118,7 +117,7 @@ function ShareCard({ title, className = "" }) {
           className={btn}
         >
           {copied ? (
-            <Check className="h-[18px] w-[18px] text-[#CC6B70]" aria-hidden />
+            <Check className="h-[18px] w-[18px] text-primary-600" aria-hidden />
           ) : (
             <Link2 className="h-[18px] w-[18px]" aria-hidden />
           )}
@@ -134,7 +133,7 @@ function ShareCard({ title, className = "" }) {
           </button>
         )}
         <a
-          href={`https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`}
+          href={`https\://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Share on WhatsApp"
@@ -149,7 +148,7 @@ function ShareCard({ title, className = "" }) {
         >
           <Mail className="h-[18px] w-[18px]" aria-hidden />
         </a>
-        <span role="status" className="ml-1 text-sm text-[#CC6B70]">
+        <span role="status" className="ml-1 text-sm text-primary-600">
           {copied ? "Link copied" : ""}
         </span>
       </div>
@@ -158,6 +157,7 @@ function ShareCard({ title, className = "" }) {
 }
 
 /* Plum call-to-action card, filled from details.cta */
+
 function CtaCard({ cta, className = "" }) {
   if (!cta) return null;
   return (
@@ -177,7 +177,6 @@ function CtaCard({ cta, className = "" }) {
         <p className="mt-1.5 text-sm leading-relaxed text-white/70">
           {cta.description}
         </p>
-
         <Link
           href={cta.href ?? "/contact"}
           className="mt-5 btn w-full btn-primary"
@@ -187,11 +186,9 @@ function CtaCard({ cta, className = "" }) {
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </span>
         </Link>
-
         <a
           href={telHref(CONTACT_INFO.phone)}
           className="mt-3 btn w-full btn-outline"
-          // className="mt-3 flex h-12 items-center justify-center gap-2 rounded-full border border-white/25 text-sm font-semibold transition-colors hover:border-[#F0A3A0] hover:text-[#F0A3A0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F0A3A0]"
         >
           <Phone className="h-4 w-4" aria-hidden />
           Call us
@@ -214,13 +211,13 @@ function TocList({ headings, activeId, onGo }) {
               aria-current={on ? "true" : undefined}
               className={`flex items-start gap-3 rounded-2xl px-3 py-2.5 text-sm leading-snug transition-colors ${focusRing} ${
                 on
-                  ? "bg-[#35183F] font-semibold text-white"
-                  : "font-medium text-[#35183F] hover:bg-[#FBF1F0]"
+                  ? "bg-secondary-500 font-semibold text-white"
+                  : "font-medium text-secondary-500 hover:bg-primary-50"
               }`}
             >
               <span
                 aria-hidden
-                className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${on ? "bg-[#F0A3A0]" : "bg-[#CC6B70]"}`}
+                className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${on ? "bg-primary-300" : "bg-primary-600"}`}
               />
               {h.text}
             </a>
@@ -237,8 +234,8 @@ function FaqItem({ item, open, onToggle, buttonId, panelId }) {
     <div
       className={`rounded-2xl border transition-colors duration-300 motion-reduce:transition-none ${
         open
-          ? "border-[#35183F] bg-[#35183F]"
-          : "border-[#35183F]/8 bg-white hover:border-[#35183F]/20"
+          ? "border-secondary-500 bg-secondary-500"
+          : "border-secondary-500/8 bg-white hover:border-secondary-500/20"
       }`}
     >
       <h3>
@@ -251,15 +248,15 @@ function FaqItem({ item, open, onToggle, buttonId, panelId }) {
           className={`flex w-full items-center justify-between gap-4 rounded-2xl px-5 py-5 text-left sm:px-6 ${focusRing}`}
         >
           <span
-            className={`text-base font-semibold leading-snug ${open ? "text-white" : "text-[#35183F]"}`}
+            className={`text-base font-semibold leading-snug ${open ? "text-white" : "text-secondary-500"}`}
           >
             {item.question}
           </span>
           <span
             className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-colors duration-300 motion-reduce:transition-none ${
               open
-                ? "bg-[#F0A3A0] text-[#35183F]"
-                : "bg-[#FBF1F0] text-[#35183F]"
+                ? "bg-primary-300 text-secondary-500"
+                : "bg-primary-50 text-secondary-500"
             }`}
           >
             <ChevronDown
@@ -290,12 +287,12 @@ function FaqItem({ item, open, onToggle, buttonId, panelId }) {
     </div>
   );
 }
-
 /* Related posts only carry id, slug, title and image, so the card is compact */
+
 function RelatedBlogCard({ item, basePath }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[#35183F]/8 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#CC6B70]/40 hover:shadow-[0_30px_60px_-38px_rgba(53,24,63,0.45)] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-      <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-[#F4C9C6] via-[#F7D9D6] to-[#EBD6EE]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-secondary-500/8 bg-white transition duration-300 hover:-translate-y-1 hover:border-primary-600/40 hover:shadow-[0_30px_60px_-38px_rgba(2,45,101,0.18)] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+      <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-50">
         {item.image ? (
           <img
             src={item.image}
@@ -307,14 +304,14 @@ function RelatedBlogCard({ item, basePath }) {
         ) : (
           <span
             aria-hidden
-            className="absolute inset-0 grid place-items-center text-[#CC6B70]/35"
+            className="absolute inset-0 grid place-items-center text-primary-600/35"
           >
             <ImageIcon className="h-10 w-10" />
           </span>
         )}
       </div>
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <h3 className="line-clamp-2 text-xl font-semibold leading-snug tracking-tight text-[#35183F] transition-colors group-hover:text-[#CC6B70]">
+        <h3 className="line-clamp-2 text-xl font-semibold leading-snug tracking-tight text-secondary-500 transition-colors group-hover:text-primary-600">
           <Link
             href={`${basePath}/${item.slug}`}
             className={`after:absolute after:inset-0 ${focusRing}`}
@@ -322,7 +319,7 @@ function RelatedBlogCard({ item, basePath }) {
             {item.title}
           </Link>
         </h3>
-        <span className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-semibold text-[#CC6B70]">
+        <span className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-semibold text-primary-600">
           Read article
           <ArrowUpRight
             className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -335,13 +332,13 @@ function RelatedBlogCard({ item, basePath }) {
 }
 
 /* ---------- page ---------- */
+
 export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
   const baseId = useId();
   const articleRef = useRef(null);
   const tocRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [openFaq, setOpenFaq] = useState(0);
-
   const {
     hero,
     faqs = [],
@@ -350,10 +347,14 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
     relatedBlogs = [],
     cta,
   } = blog || {};
-
-  const { html, headings } = useMemo(() => prepareContent(content), [content]);
+  const { html, headings } = useMemo(() => {
+    // Sanitize editor HTML before adding TOC IDs or rendering it.
+    const safeHtml = DOMPurify.sanitize(content || "", {
+      USE_PROFILES: { html: true },
+    });
+    return prepareContent(safeHtml);
+  }, [content]);
   const [activeId, setActiveId] = useState(headings[0]?.id);
-
   /* Reading progress bar */
   useEffect(() => {
     const el = articleRef.current;
@@ -371,12 +372,10 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
       window.removeEventListener("resize", onScroll);
     };
   }, [blog]);
-
   /* Highlight the heading currently being read (works scrolling up and down) */
   useEffect(() => {
     if (!headings.length) return;
     let frame = 0;
-
     const update = () => {
       let current = headings[0].id;
       for (const h of headings) {
@@ -391,7 +390,6 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(update);
     };
-
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
@@ -399,9 +397,7 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
       window.removeEventListener("scroll", onScroll);
     };
   }, [html]);
-
   if (!blog) return null;
-
   const goTo = (e, id) => {
     e.preventDefault();
     setActiveId(id);
@@ -415,49 +411,43 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
     });
     history.replaceState(null, "", `#${id}`);
   };
-
   const shareTitle = hero?.title ?? blog.card?.title ?? "";
-
   return (
     <>
       {/* Reading progress */}
       <div aria-hidden className="fixed inset-x-0 top-0 z-[60] h-1">
         <div
-          className="h-full origin-left bg-[#CC6B70]"
+          className="h-full origin-left bg-primary-600"
           style={{ transform: `scaleX(${progress})` }}
         />
       </div>
-
       {/* ---------- Header ---------- */}
       <PageWrapper
         as="header"
-        className="border-b border-[#35183F]/5 bg-primary-50"
+        className="border-b border-secondary-500/5 bg-primary-50"
         containerClassName="text-center pt-10"
       >
         {hero?.category && <Eyebrow>{hero.category}</Eyebrow>}
-
-        <h1 className="mx-auto mt-5 max-w-4xl text-balance text-[2rem] font-semibold leading-[1.1] tracking-[-0.025em] text-[#35183F] sm:text-5xl lg:text-6xl">
+        <h1 className="mx-auto mt-5 max-w-4xl text-balance text-[2rem] font-semibold leading-[1.1] tracking-[-0.025em] text-secondary-500 sm:text-5xl lg:text-6xl">
           {hero?.title}
         </h1>
-
-        {hero?.subtitle && (
-          <p className="mx-auto mt-5 max-w-2xl text-balance text-[1.0625rem] leading-relaxed text-[#5B4663] sm:text-lg">
-            {hero.subtitle}
+        {hero?.description && (
+          <p className="mx-auto mt-5 max-w-2xl text-balance text-[1.0625rem] leading-relaxed text-secondary-900 sm:text-lg">
+            {hero.description}
           </p>
         )}
-
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-[#5B4663]">
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-secondary-900">
           {hero?.author && (
             <span className="flex items-center gap-2.5">
               <Avatar name={hero.author} className="h-9 w-9 text-sm" />
-              <span className="font-semibold text-[#35183F]">
+              <span className="font-semibold text-secondary-500">
                 {hero.author}
               </span>
             </span>
           )}
           {hero?.publishedAt && (
             <span className="flex items-center gap-1.5">
-              <CalendarDays className="h-4 w-4 text-[#CC6B70]" aria-hidden />
+              <CalendarDays className="h-4 w-4 text-primary-600" aria-hidden />
               <time dateTime={hero.publishedAt}>
                 {formatDate(hero.publishedAt)}
               </time>
@@ -465,15 +455,14 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
           )}
           {hero?.readTime && (
             <span className="flex items-center gap-1.5">
-              <Clock className="h-4 w-4 text-[#CC6B70]" aria-hidden />
+              <Clock className="h-4 w-4 text-primary-600" aria-hidden />
               {hero.readTime}
             </span>
           )}
         </div>
-
         {/* ---------- Cover image ---------- */}
         <div className="mt-10 lg:mt-14">
-          <div className="relative mx-auto aspect-[16/9] max-w-5xl overflow-hidden rounded-2xl rounded-br-[2.5rem] rounded-tl-[2.5rem] bg-gradient-to-br from-[#F4C9C6] via-[#F7D9D6] to-[#EBD6EE] shadow-[0_40px_80px_-45px_rgba(53,24,63,0.55)] ring-4 ring-white sm:rounded-br-[4rem] sm:rounded-tl-[4rem] sm:ring-8">
+          <div className="relative mx-auto aspect-[16/9] max-w-5xl overflow-hidden rounded-2xl rounded-br-[2.5rem] rounded-tl-[2.5rem] bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-50 shadow-[0_40px_80px_-45px_rgba(2,45,101,0.22)] ring-4 ring-white sm:rounded-br-[4rem] sm:rounded-tl-[4rem] sm:ring-8">
             {hero?.image && (
               <img
                 src={hero.image}
@@ -486,7 +475,6 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
           </div>
         </div>
       </PageWrapper>
-
       {/* ---------- Article + sidebar ---------- */}
       <PageWrapper
         as="section"
@@ -500,13 +488,13 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
             {headings.length > 1 && (
               <details
                 ref={tocRef}
-                className="group mb-8 rounded-3xl border border-[#35183F]/8 bg-[#FBF1F0]/60 lg:hidden"
+                className="group mb-8 rounded-3xl border border-secondary-500/8 bg-primary-50/60 lg:hidden"
               >
                 <summary
-                  className={`flex cursor-pointer list-none items-center justify-between gap-3 rounded-3xl px-5 py-4 text-sm font-semibold text-[#35183F] [&::-webkit-details-marker]:hidden ${focusRing}`}
+                  className={`flex cursor-pointer list-none items-center justify-between gap-3 rounded-3xl px-5 py-4 text-sm font-semibold text-secondary-500 [&::-webkit-details-marker]:hidden ${focusRing}`}
                 >
                   <span className="flex items-center gap-2.5">
-                    <List className="h-4 w-4 text-[#CC6B70]" aria-hidden />
+                    <List className="h-4 w-4 text-primary-600" aria-hidden />
                     In this article
                   </span>
                   <ChevronDown
@@ -523,7 +511,6 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
                 </div>
               </details>
             )}
-
             {/* The article: your HTML, styled by blog-content.css */}
             <div ref={articleRef}>
               <div
@@ -531,26 +518,24 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
                 dangerouslySetInnerHTML={{ __html: html }}
               />
             </div>
-
             {/* Tags */}
             {tags.length > 0 && (
-              <div className="mt-12 flex flex-wrap items-center gap-2.5 border-t border-[#35183F]/8 pt-8">
-                <Tag className="h-4 w-4 text-[#CC6B70]" aria-hidden />
+              <div className="mt-12 flex flex-wrap items-center gap-2.5 border-t border-secondary-500/8 pt-8">
+                <Tag className="h-4 w-4 text-primary-600" aria-hidden />
                 {tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-[#FBF1F0] px-4 py-2 text-sm font-medium text-[#35183F]"
+                    className="rounded-full bg-primary-50 px-4 py-2 text-sm font-medium text-secondary-500"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
             )}
-
             {/* FAQs */}
             {faqs.length > 0 && (
               <div className="mt-14">
-                <h2 className="text-2xl font-semibold tracking-tight text-[#35183F] sm:text-3xl">
+                <h2 className="text-2xl font-semibold tracking-tight text-secondary-500 sm:text-3xl">
                   Frequently asked questions
                 </h2>
                 <div className="mt-6 space-y-3">
@@ -567,11 +552,10 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
                 </div>
               </div>
             )}
-
             {/* Medical disclaimer */}
-            <div className="mt-10 flex items-start gap-3 rounded-2xl bg-[#FBF1F0]/70 p-4 text-sm leading-relaxed text-[#5B4663] sm:p-5">
+            <div className="mt-10 flex items-start gap-3 rounded-2xl bg-primary-50/70 p-4 text-sm leading-relaxed text-secondary-900 sm:p-5">
               <Info
-                className="mt-0.5 h-4 w-4 shrink-0 text-[#CC6B70]"
+                className="mt-0.5 h-4 w-4 shrink-0 text-primary-600"
                 aria-hidden
               />
               <p>
@@ -579,7 +563,6 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
                 advice from your doctor.
               </p>
             </div>
-
             {/* Mobile / tablet: share + CTA under the article */}
             <div className="mt-10 space-y-4 lg:hidden">
               <ShareCard title={shareTitle} />
@@ -587,16 +570,15 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
             </div>
           </div>
         </div>
-
         {/* Sidebar (desktop) */}
         <aside className="hidden lg:block">
           <div className="sticky top-28 space-y-4">
             {headings.length > 1 && (
               <nav
                 aria-label="On this page"
-                className="max-h-[calc(100vh-22rem)] min-h-[8rem] overflow-y-auto overscroll-contain rounded-3xl border border-[#35183F]/8 bg-white p-3"
+                className="max-h-[calc(100vh-22rem)] min-h-[8rem] overflow-y-auto overscroll-contain rounded-3xl border border-secondary-500/8 bg-white p-3"
               >
-                <p className="px-3 pb-2 pt-2 text-sm font-semibold text-[#35183F]">
+                <p className="px-3 pb-2 pt-2 text-sm font-semibold text-secondary-500">
                   On this page
                 </p>
                 <TocList headings={headings} activeId={activeId} onGo={goTo} />
@@ -607,17 +589,29 @@ export default function BlogDetailsPage({ blog, basePath = "/blogs" }) {
           </div>
         </aside>
       </PageWrapper>
-
       {/* ---------- Related blogs ---------- */}
       {relatedBlogs.length > 0 && (
         <PageWrapper
           as="section"
           className="bg-primary-50"
+          paddingY="py-16 sm:py-20 lg:py-24"
+          containerClassName="mx-auto"
         >
-          <SectionHeader title={'Keep Reading'} description={''}/>
-
-
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <h2 className="text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-secondary-500 sm:text-4xl">
+              Keep reading
+            </h2>
+            <Link
+              href={basePath}
+              className={`group inline-flex items-center gap-2.5 text-[0.9375rem] font-semibold text-secondary-500 transition-colors hover:text-primary-600 ${focusRing}`}
+            >
+              View all articles
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-secondary-500 text-white transition-colors group-hover:bg-primary-600">
+                <ArrowUpRight className="h-4 w-4" aria-hidden />
+              </span>
+            </Link>
+          </div>
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {relatedBlogs.slice(0, 3).map((item) => (
               <li key={item.id}>
                 <RelatedBlogCard item={item} basePath={basePath} />
