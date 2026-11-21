@@ -21,5 +21,5 @@ export const APPOINTMENT_URL = "https://remedoapp.com/rweb/doctors/drprashantsag
 
 export const BASE_URL = "https://www.sarvamhospital.com";
 
-export const BRAND_LOGO = "/Images/logo.png";
-export const BRAND_ICON = "/Images/logo.png";
+export const BRAND_LOGO = "/Images/logo-new.png";
+export const BRAND_ICON = "/Images/logo-new.png";
