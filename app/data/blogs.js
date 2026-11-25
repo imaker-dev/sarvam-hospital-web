@@ -8,7 +8,7 @@ export const blogs = [
       title: "A Complete Guide to Pregnancy Care",
       excerpt:
         "Learn about essential antenatal checkups, healthy pregnancy habits, and the care needed throughout pregnancy.",
-      image: "/Images/Blogs/pregnancy-care-guide.jpg",
+      image: "/Images/Blogs/pregnancy-care-guide.webp",
       category: "Pregnancy Care",
       author: "Dr. Priya Sharma",
       publishedAt: "2026-09-15",
@@ -32,7 +32,7 @@ export const blogs = [
         title: "A Complete Guide to Pregnancy Care",
         subtitle:
           "Essential guidance for a healthy and well-supported pregnancy journey.",
-        image: "/Images/Blogs/pregnancy-care-guide.jpg",
+        image: "/Images/Blogs/pregnancy-care-guide.webp",
         category: "Pregnancy Care",
         author: "Dr. Priya Sharma",
         publishedAt: "2026-09-15",
@@ -134,7 +134,7 @@ export const blogs = [
       title: "Understanding PCOS in Women",
       excerpt:
         "Learn about common PCOS symptoms, diagnosis, and treatment approaches that may help manage this hormonal condition.",
-      image: "/Images/Blogs/pcos-awareness.jpg",
+      image: "/Images/Blogs/pcos-awareness.webp",
       category: "Women's Health",
       author: "Dr. Ananya Patel",
       publishedAt: "2026-09-20",
@@ -158,7 +158,7 @@ export const blogs = [
         title: "Understanding PCOS in Women",
         subtitle:
           "Recognizing symptoms and understanding your options for managing PCOS.",
-        image: "/Images/Blogs/pcos-awareness.jpg",
+        image: "/Images/Blogs/pcos-awareness.webp",
         category: "Women's Health",
         author: "Dr. Ananya Patel",
         publishedAt: "2026-09-20",

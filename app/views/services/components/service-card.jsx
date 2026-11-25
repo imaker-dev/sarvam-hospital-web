@@ -15,8 +15,7 @@ function ServiceCard({ service, linkLabel = "View all details" }) {
       <div className="aspect-[3/2] w-full shrink-0 overflow-hidden">
         {image ? (
           <img
-            // src={image}
-            src={"/Images/Services/service-1.webp"}
+            src={image}
             alt=""
             loading="lazy"
             className="h-full w-full object-cover"

@@ -77,7 +77,7 @@ export function generateSEO({
       (Array.isArray(keywords) ? keywords : [])
         .filter((keyword) => typeof keyword === "string")
         .map((keyword) => keyword.trim())
-        .filter(Boolean)
+        .filter(Boolean),
     ),
   ];
 
@@ -89,9 +89,7 @@ export function generateSEO({
     title: pageTitle,
     description: pageDescription,
 
-    ...(uniqueKeywords.length > 0
-      ? { keywords: uniqueKeywords }
-      : {}),
+    ...(uniqueKeywords.length > 0 ? { keywords: uniqueKeywords } : {}),
 
     metadataBase: new URL(BASE_URL),
 

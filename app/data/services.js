@@ -14,7 +14,7 @@ export const services = [
       title: "Pregnancy & Maternity Care",
       description:
         "Comprehensive care for mother and baby throughout pregnancy, delivery and the postpartum period.",
-      image: "/images/services/obstetrics/card.jpg",
+      image: "/Images/Services/Obstetrics/card.webp",
     },
 
     details: {
@@ -39,7 +39,7 @@ export const services = [
         title: "Comprehensive Pregnancy & Maternity Care",
         description:
           "At Sarvam Hospital – Woman & Child Speciality, we provide comprehensive obstetric care throughout pregnancy — from the early stages of pregnancy to childbirth and postpartum recovery. Our focus is on closely monitoring the health of both mother and baby and providing appropriate care and guidance at every stage.",
-        image: "/images/services/obstetrics/hero.jpg",
+        image: "/Images/Services/Obstetrics/hero.webp",
       },
 
       subServices: [
@@ -47,7 +47,7 @@ export const services = [
           id: "pregnancy-care",
           title: "Pregnancy Care",
           slug: "pregnancy-care",
-          image: "/images/services/obstetrics/pregnancy-care.jpg",
+          image: "/Images/Services/Obstetrics/pregnancy-care.webp",
 
           description:
             "Every pregnancy requires regular medical supervision to monitor the health and development of both mother and baby. Our pregnancy care services include routine consultations, maternal health monitoring, assessment of fetal growth and guidance throughout the pregnancy journey.",
@@ -57,7 +57,7 @@ export const services = [
           id: "antenatal-care",
           title: "Antenatal Care",
           slug: "antenatal-care",
-          image: "/images/services/obstetrics/antenatal-care.jpg",
+          image: "/Images/Services/Obstetrics/antenatal-care.webp",
 
           description:
             "Regular antenatal check-ups help identify and manage potential concerns during pregnancy. Antenatal care may include:",
@@ -79,7 +79,7 @@ export const services = [
           id: "normal-delivery",
           title: "Normal Delivery",
           slug: "normal-delivery",
-          image: "/images/services/obstetrics/normal-delivery.jpg",
+          image: "/Images/Services/Obstetrics/normal-delivery.webp",
 
           description:
             "When medically appropriate, normal vaginal delivery may be recommended. Throughout labour, the condition of the mother and baby is monitored, and decisions regarding delivery are made according to clinical requirements.",
@@ -92,7 +92,7 @@ export const services = [
           id: "painless-delivery",
           title: "Painless Delivery",
           slug: "painless-delivery",
-          image: "/images/services/obstetrics/painless-delivery.jpg",
+          image: "/Images/Services/Obstetrics/painless-delivery.webp",
 
           description:
             "Pain-management options may be available during labour for suitable patients. The appropriate method depends on the mother's health, stage of labour and clinical assessment.",
@@ -105,7 +105,7 @@ export const services = [
           id: "forceps-delivery",
           title: "Forceps Delivery",
           slug: "forceps-delivery",
-          image: "/images/services/obstetrics/forceps-delivery.jpg",
+          image: "/Images/Services/Obstetrics/forceps-delivery.webp",
 
           description:
             "In certain situations, an obstetrician may recommend an assisted vaginal delivery using forceps to help safely complete the delivery.",
@@ -118,7 +118,7 @@ export const services = [
           id: "caesarean-section",
           title: "Caesarean Section",
           slug: "caesarean-section",
-          image: "/images/services/obstetrics/caesarean-section.jpg",
+          image: "/Images/Services/Obstetrics/caesarean-section.webp",
 
           description:
             "A Caesarean section is a surgical method of delivering a baby and may be recommended when vaginal delivery is not considered appropriate or safe for the mother or baby.",
@@ -140,7 +140,7 @@ export const services = [
           id: "high-risk-pregnancy-care",
           title: "High-Risk Pregnancy Care",
           slug: "high-risk-pregnancy-care",
-          image: "/images/services/obstetrics/high-risk-pregnancy-care.jpg",
+          image: "/Images/Services/Obstetrics/high-risk-pregnancy-care.webp",
 
           description:
             "Some pregnancies require closer monitoring because of maternal health conditions, pregnancy-related complications or concerns regarding the baby's development.",
@@ -166,7 +166,7 @@ export const services = [
           id: "postpartum-care",
           title: "Postpartum Care",
           slug: "postpartum-care",
-          image: "/images/services/obstetrics/postpartum-care.jpg",
+          image: "/Images/Services/Obstetrics/postpartum-care.webp",
 
           description:
             "Care continues after childbirth. Postpartum consultations help monitor the mother's recovery and address concerns that may arise during the weeks following delivery.",
@@ -187,7 +187,7 @@ export const services = [
           id: "pregnancy-ultrasound",
           title: "Pregnancy Ultrasound & Fetal Monitoring",
           slug: "pregnancy-ultrasound",
-          image: "/images/services/obstetrics/pregnancy-ultrasound.jpg",
+          image: "/Images/Services/Obstetrics/pregnancy-ultrasound.webp",
 
           description:
             "Ultrasound examinations may be recommended at different stages of pregnancy to assess pregnancy progression and fetal development.",
@@ -254,7 +254,7 @@ export const services = [
       title: "Women's Gynaecological Care",
       description:
         "Personalised care for menstrual, hormonal, reproductive and other gynaecological health concerns.",
-      image: "/images/services/gynaecology/card.jpg",
+      image: "/Images/Services/Gynaecology/card.webp",
     },
 
     details: {
@@ -279,7 +279,7 @@ export const services = [
         title: "Comprehensive Women's Gynaecological Care",
         description:
           "At Sarvam Hospital – Woman & Child Speciality, our gynaecology services focus on the health and well-being of women through different stages of life. From menstrual and hormonal concerns to menopause, reproductive health and gynaecological conditions requiring medical or surgical management, our care is tailored to individual needs.",
-        image: "/images/services/gynaecology/hero.jpg",
+        image: "/Images/Services/Gynaecology/hero.webp",
       },
 
       cta: {
@@ -293,7 +293,7 @@ export const services = [
           id: "general-gynaecology",
           title: "General Gynaecology",
           slug: "general-gynaecology",
-          image: "/images/services/gynaecology/general-gynaecology.jpg",
+          image: "/Images/Services/Gynaecology/general-gynaecology.webp",
 
           description:
             "Our gynaecology services address a wide range of women's health concerns, including menstrual, hormonal and reproductive health issues.",
@@ -314,7 +314,7 @@ export const services = [
           id: "menopause-clinic",
           title: "Menopause Clinic",
           slug: "menopause-clinic",
-          image: "/images/services/gynaecology/menopause-clinic.jpg",
+          image: "/Images/Services/Gynaecology/menopause-clinic.webp",
 
           description:
             "Menopause is an important stage of a woman's life and may be associated with physical and emotional changes.",
@@ -338,7 +338,7 @@ export const services = [
           id: "ovarian-cyst-management",
           title: "Ovarian Cyst Management",
           slug: "ovarian-cyst-management",
-          image: "/images/services/gynaecology/ovarian-cyst-management.jpg",
+          image: "/Images/Services/Gynaecology/ovarian-cyst-management.webp",
 
           description:
             "Ovarian cysts are fluid-filled sacs that can develop in or on the ovaries. Many cysts are benign and may resolve on their own, while some require further evaluation or treatment.",
@@ -364,7 +364,7 @@ export const services = [
           id: "hysterectomy",
           title: "Hysterectomy",
           slug: "hysterectomy",
-          image: "/images/services/gynaecology/hysterectomy.jpg",
+          image: "/Images/Services/Gynaecology/hysterectomy.webp",
 
           description:
             "A hysterectomy is a surgical procedure to remove the uterus. It may be recommended for certain gynaecological conditions when other treatment options are not suitable or effective.",
@@ -391,7 +391,7 @@ export const services = [
           id: "tubal-ligation",
           title: "Tubal Ligation",
           slug: "tubal-ligation",
-          image: "/images/services/gynaecology/tubal-ligation.jpg",
+          image: "/Images/Services/Gynaecology/tubal-ligation.webp",
 
           description:
             "Tubal ligation is a permanent method of contraception in which the fallopian tubes are blocked or sealed to prevent pregnancy.",
@@ -404,7 +404,8 @@ export const services = [
           id: "cervical-ovarian-conditions",
           title: "Cervical & Ovarian Conditions",
           slug: "cervical-ovarian-conditions",
-          image: "/images/services/gynaecology/cervical-ovarian-conditions.jpg",
+          image:
+            "/Images/Services/Gynaecology/cervical-ovarian-conditions.webp",
 
           description:
             "Sarvam Hospital provides evaluation and management of various conditions affecting the cervix and ovaries.",
@@ -425,7 +426,7 @@ export const services = [
           id: "mtp-services",
           title: "MTP Services",
           slug: "mtp-services",
-          image: "/images/services/gynaecology/mtp-services.jpg",
+          image: "/Images/Services/Gynaecology/mtp-services.webp",
 
           description:
             "Medical Termination of Pregnancy (MTP) services are provided where legally permitted and medically appropriate.",
@@ -441,7 +442,7 @@ export const services = [
           title: "Laparoscopic Gynaecological Surgery",
           slug: "laparoscopic-gynaecological-surgery",
           image:
-            "/images/services/gynaecology/laparoscopic-gynaecological-surgery.jpg",
+            "/Images/Services/Gynaecology/laparoscopic-gynaecological-surgery.webp",
 
           description:
             "Laparoscopy is a minimally invasive surgical technique used to diagnose and treat certain gynaecological conditions through small incisions.",
@@ -509,7 +510,7 @@ export const services = [
       title: "Fertility, IUI & IVF Care",
       description:
         "Fertility evaluation and treatment support including IUI, IVF and fertility ultrasound services.",
-      image: "/images/services/infertility-iui-ivf/card.jpg",
+      image: "/Images/Services/Fertility/card.webp",
     },
 
     details: {
@@ -534,7 +535,7 @@ export const services = [
         title: "Fertility Care & Assisted Reproductive Services",
         description:
           "At Sarvam Hospital – Woman & Child Speciality, infertility care focuses on understanding the individual factors affecting conception and providing appropriate fertility guidance and treatment. Depending on the medical evaluation, treatment may include fertility assessment, fertility ultrasound, Intrauterine Insemination (IUI) or In Vitro Fertilization (IVF).",
-        image: "/images/services/infertility-iui-ivf/hero.jpg",
+        image: "/Images/Services/Fertility/hero.webp",
       },
 
       subServices: [
@@ -542,8 +543,7 @@ export const services = [
           id: "fertility-evaluation",
           title: "Fertility Evaluation",
           slug: "fertility-evaluation",
-          image:
-            "/images/services/infertility-iui-ivf/fertility-evaluation.jpg",
+          image: "/Images/Services/Fertility/fertility-evaluation.webp",
 
           description:
             "A detailed fertility evaluation helps identify possible factors affecting conception in either partner.",
@@ -568,7 +568,7 @@ export const services = [
           id: "iui",
           title: "IUI – Intrauterine Insemination",
           slug: "iui",
-          image: "/images/services/infertility-iui-ivf/iui.jpg",
+          image: "/Images/Services/Fertility/iui.webp",
 
           description:
             "Intrauterine Insemination (IUI) is a fertility treatment in which specially prepared sperm is placed directly into the uterus around the time of ovulation.",
@@ -590,7 +590,7 @@ export const services = [
           id: "ivf",
           title: "IVF – In Vitro Fertilization",
           slug: "ivf",
-          image: "/images/services/infertility-iui-ivf/ivf.jpg",
+          image: "/Images/Services/Fertility/ivf.webp",
 
           description:
             "In Vitro Fertilization (IVF) is an assisted reproductive technology in which eggs and sperm are brought together in a laboratory to achieve fertilization. An embryo may subsequently be transferred to the uterus as part of the treatment.",
@@ -618,8 +618,7 @@ export const services = [
           id: "fertility-ultrasound",
           title: "Fertility Ultrasound",
           slug: "fertility-ultrasound",
-          image:
-            "/images/services/infertility-iui-ivf/fertility-ultrasound.jpg",
+          image: "/Images/Services/Fertility/fertility-ultrasound.webp",
 
           description:
             "Ultrasound plays an important role in fertility assessment and treatment monitoring.",
@@ -696,7 +695,7 @@ export const services = [
       title: "Child Healthcare",
       description:
         "Comprehensive paediatric care including consultations, growth monitoring, vaccinations and common childhood concerns.",
-      image: "/images/services/paediatrics/card.jpg",
+      image: "/Images/Services/Paediatrics/card.webp",
     },
 
     details: {
@@ -721,7 +720,7 @@ export const services = [
         title: "Comprehensive Child Healthcare",
         description:
           "At Sarvam Hospital – Woman & Child Speciality, our paediatric services focus on the health, growth and well-being of infants, children and adolescents. From routine consultations and vaccinations to the evaluation and management of common childhood illnesses, our paediatric care is tailored to the needs of every child.",
-        image: "/images/services/paediatrics/hero.jpg",
+        image: "/Images/Services/Paediatrics/hero.webp",
       },
 
       subServices: [
@@ -729,7 +728,7 @@ export const services = [
           id: "paediatric-consultation",
           title: "Paediatric Consultation",
           slug: "paediatric-consultation",
-          image: "/images/services/paediatrics/paediatric-consultation.jpg",
+          image: "/Images/Services/Paediatrics/paediatric-consultation.webp",
 
           description:
             "Regular paediatric consultations help monitor a child's health, growth and development and provide timely medical care when concerns arise.",
@@ -753,7 +752,7 @@ export const services = [
           id: "child-health",
           title: "Child Health",
           slug: "child-health",
-          image: "/images/services/paediatrics/child-health.jpg",
+          image: "/Images/Services/Paediatrics/child-health.webp",
 
           description:
             "Healthy childhood development involves more than treating illness. Regular health monitoring can help identify developmental, nutritional or health concerns at an appropriate stage.",
@@ -776,7 +775,7 @@ export const services = [
           id: "vaccination",
           title: "Vaccination",
           slug: "vaccination",
-          image: "/images/services/paediatrics/vaccination.jpg",
+          image: "/Images/Services/Paediatrics/vaccination.webp",
 
           description:
             "Vaccination is an important part of preventive healthcare for children. Vaccines help protect against a range of vaccine-preventable infections.",
@@ -805,7 +804,7 @@ export const services = [
           id: "common-childhood-illnesses",
           title: "Common Childhood Illnesses",
           slug: "common-childhood-illnesses",
-          image: "/images/services/paediatrics/common-childhood-illnesses.jpg",
+          image: "/Images/Services/Paediatrics/common-childhood-illnesses.webp",
 
           description:
             "Children may experience a variety of common infections and health concerns during their growing years. A paediatric consultation can help assess symptoms and determine appropriate treatment.",
@@ -834,7 +833,7 @@ export const services = [
           id: "paediatric-facilities",
           title: "Paediatric Facilities",
           slug: "paediatric-facilities",
-          image: "/images/services/paediatrics/paediatric-facilities.jpg",
+          image: "/Images/Services/Paediatrics/paediatric-facilities.webp",
 
           description:
             "Sarvam Hospital's existing website information mentions several facilities supporting paediatric and newborn care.",
@@ -910,7 +909,7 @@ export const services = [
       title: "Newborn & Neonatal Care",
       description:
         "Dedicated newborn care with assessment, monitoring, thermal support, phototherapy and paediatric care.",
-      image: "/images/services/newborn-neonatal-care/card.jpg",
+      image: "/Images/Services/Neonatal/card.webp",
     },
 
     details: {
@@ -935,7 +934,7 @@ export const services = [
         title: "Specialised Care for Newborns",
         description:
           "The first hours and days of life are an important period for a newborn's health and development. Sarvam Hospital – Woman & Child Speciality provides newborn assessment, monitoring and paediatric support around the time of delivery, along with facilities for newborns who require additional observation or treatment. Our newborn care is focused on early assessment, timely medical attention and monitoring according to each baby's individual needs.",
-        image: "/images/services/newborn-neonatal-care/hero.jpg",
+        image: "/Images/Services/Neonatal/hero.webp",
       },
 
       subServices: [
@@ -943,8 +942,7 @@ export const services = [
           id: "newborn-assessment",
           title: "Newborn Assessment",
           slug: "newborn-assessment",
-          image:
-            "/images/services/newborn-neonatal-care/newborn-assessment.jpg",
+          image: "/Images/Services/Neonatal/newborn-assessment.webp",
 
           description:
             "Every newborn may require an initial health assessment after birth to evaluate overall well-being and identify any concerns that may require further observation.",
@@ -967,8 +965,7 @@ export const services = [
           id: "paediatrician-at-delivery",
           title: "Paediatrician at Delivery",
           slug: "paediatrician-at-delivery",
-          image:
-            "/images/services/newborn-neonatal-care/paediatrician-at-delivery.jpg",
+          image: "/Images/Services/Neonatal/paediatrician-at-delivery.webp",
 
           description:
             "A paediatrician is available around the time of delivery to provide medical assessment and support for the newborn when required.",
@@ -987,7 +984,7 @@ export const services = [
           id: "newborn-warmer",
           title: "Newborn Warmer",
           slug: "newborn-warmer",
-          image: "/images/services/newborn-neonatal-care/newborn-warmer.jpg",
+          image: "/Images/Services/Neonatal/newborn-warmer.webp",
 
           description:
             "A newborn warmer helps maintain an appropriate body temperature for babies who require additional thermal support after birth.",
@@ -1000,7 +997,7 @@ export const services = [
           id: "phototherapy",
           title: "Phototherapy",
           slug: "phototherapy",
-          image: "/images/services/newborn-neonatal-care/phototherapy.jpg",
+          image: "/Images/Services/Neonatal/phototherapy.webp",
 
           description:
             "Phototherapy is a commonly used treatment for newborn jaundice when recommended by a paediatrician.",
@@ -1015,8 +1012,7 @@ export const services = [
           id: "neonatal-monitoring",
           title: "Neonatal Monitoring",
           slug: "neonatal-monitoring",
-          image:
-            "/images/services/newborn-neonatal-care/neonatal-monitoring.jpg",
+          image: "/Images/Services/Neonatal/neonatal-monitoring.webp",
 
           description:
             "Newborns who require additional observation may be monitored using appropriate clinical equipment and under paediatric supervision.",
@@ -1039,8 +1035,7 @@ export const services = [
           id: "neonatologist-consultation",
           title: "Neonatologist Consultation",
           slug: "neonatologist-consultation",
-          image:
-            "/images/services/newborn-neonatal-care/neonatologist-consultation.jpg",
+          image: "/Images/Services/Neonatal/neonatologist-consultation.webp",
 
           conditional: true,
 
@@ -1103,7 +1098,7 @@ export const services = [
       title: "Sonography & Ultrasound",
       description:
         "Ultrasound services supporting pregnancy care, fertility assessment and gynaecological evaluation.",
-      image: "/images/services/sonography/card.jpg",
+      image: "/Images/Services/Ultrasound/card.webp",
     },
 
     details: {
@@ -1128,7 +1123,7 @@ export const services = [
         title: "Sonography & Ultrasound Services",
         description:
           "Ultrasound imaging services supporting pregnancy care, fertility assessment and gynaecological evaluation.",
-        image: "/images/services/sonography/hero.jpg",
+        image: "/Images/Services/Ultrasound/hero.webp",
       },
 
       subServices: [
@@ -1136,7 +1131,7 @@ export const services = [
           id: "obstetric-ultrasound",
           title: "Obstetric Ultrasound",
           slug: "obstetric-ultrasound",
-          image: "/images/services/sonography/obstetric-ultrasound.jpg",
+          image: "/Images/Services/Ultrasound/obstetric-ultrasound.webp",
 
           description:
             "Obstetric ultrasound is an important part of pregnancy care and helps monitor the health, growth and development of the baby throughout pregnancy.",
@@ -1160,7 +1155,7 @@ export const services = [
           id: "colour-doppler",
           title: "Colour Doppler",
           slug: "colour-doppler",
-          image: "/images/services/sonography/colour-doppler.jpg",
+          image: "/Images/Services/Ultrasound/colour-doppler.webp",
 
           description:
             "Colour Doppler is an ultrasound technique used to assess blood flow through blood vessels and may be recommended during pregnancy when clinically indicated.",
@@ -1182,7 +1177,7 @@ export const services = [
           id: "fertility-ultrasound",
           title: "Fertility Ultrasound",
           slug: "fertility-ultrasound",
-          image: "/images/services/sonography/fertility-ultrasound.jpg",
+          image: "/Images/Services/Ultrasound/fertility-ultrasound.webp",
 
           description:
             "Fertility ultrasound helps evaluate the reproductive organs and may be used to monitor the menstrual cycle during fertility assessment or treatment.",
@@ -1205,7 +1200,7 @@ export const services = [
           id: "gynaecological-ultrasound",
           title: "Gynaecological Ultrasound",
           slug: "gynaecological-ultrasound",
-          image: "/images/services/sonography/gynaecological-ultrasound.jpg",
+          image: "/Images/Services/Ultrasound/gynaecological-ultrasound.webp",
 
           description:
             "Gynaecological ultrasound helps evaluate the uterus, ovaries and other pelvic structures and may assist in investigating various women's health concerns.",
@@ -1277,7 +1272,7 @@ export const services = [
       title: "Gynaecological Laparoscopy",
       description:
         "Minimally invasive laparoscopic procedures for selected gynaecological conditions and surgical needs.",
-      image: "/images/services/laparoscopy/card.jpg",
+      image: "/Images/Services/Laparoscopy/card.webp",
     },
 
     details: {
@@ -1302,7 +1297,7 @@ export const services = [
         title: "Minimally Invasive Gynaecological Surgery",
         description:
           "Laparoscopy is a minimally invasive surgical technique used to diagnose and treat selected gynaecological conditions through small incisions. The procedure and surgical approach are determined according to the patient's condition and medical requirements.",
-        image: "/images/services/laparoscopy/hero.jpg",
+        image: "/Images/Services/Laparoscopy/hero.webp",
       },
 
       subServices: [
@@ -1310,7 +1305,7 @@ export const services = [
           id: "diagnostic-laparoscopy",
           title: "Diagnostic Laparoscopy",
           slug: "diagnostic-laparoscopy",
-          image: "/images/services/laparoscopy/diagnostic-laparoscopy.jpg",
+          image: "/Images/Services/Laparoscopy/diagnostic-laparoscopy.webp",
 
           description:
             "Diagnostic laparoscopy allows the gynaecologist to examine the pelvic organs and identify conditions that may not be fully evaluated through routine examinations or imaging.",
@@ -1333,7 +1328,7 @@ export const services = [
           id: "laparoscopic-hysterectomy",
           title: "Laparoscopic Hysterectomy",
           slug: "laparoscopic-hysterectomy",
-          image: "/images/services/laparoscopy/laparoscopic-hysterectomy.jpg",
+          image: "/Images/Services/Laparoscopy/laparoscopic-hysterectomy.webp",
 
           description:
             "Laparoscopic hysterectomy is a minimally invasive procedure to remove the uterus using small abdominal incisions.",
@@ -1354,7 +1349,7 @@ export const services = [
           id: "ovarian-cystectomy",
           title: "Ovarian Cystectomy",
           slug: "ovarian-cystectomy",
-          image: "/images/services/laparoscopy/ovarian-cystectomy.jpg",
+          image: "/Images/Services/Laparoscopy/ovarian-cystectomy.webp",
 
           description:
             "Ovarian cystectomy is a surgical procedure to remove an ovarian cyst while preserving the healthy ovarian tissue whenever medically appropriate.",
@@ -1376,7 +1371,7 @@ export const services = [
           title: "Other Gynaecological Laparoscopic Procedures",
           slug: "other-gynaecological-laparoscopic-procedures",
           image:
-            "/images/services/laparoscopy/other-gynaecological-procedures.jpg",
+            "/Images/Services/Laparoscopy/other-gynaecological-procedures.webp",
 
           description:
             "Laparoscopic techniques may also be used for selected gynaecological conditions and procedures based on individual medical requirements.",
