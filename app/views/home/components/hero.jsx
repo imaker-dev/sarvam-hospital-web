@@ -21,8 +21,8 @@ const DEFAULT_CONTENT = {
   secondaryCta: { label: "Explore Clinic", href: "#tour" },
   stats: [
     { value: "15", suffix: "+", label: "Years of care" },
-    { value: "50", suffix: "+", label: "Specialist doctors" },
-    { value: "10K", suffix: "+", label: "Happy families" },
+    { value: "24/7", suffix: "", label: "Care and support" },
+    { value: "10K", suffix: "+", label: "Families cared for" },
   ],
   slides: [
     {
