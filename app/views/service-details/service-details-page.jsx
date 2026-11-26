@@ -127,10 +127,14 @@ const ServiceDetailsPage = ({ data }) => {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Link href="/appointment" className="btn btn-lg btn-primary">
+            <a
+              href={APPOINTMENT_URL}
+              target="_blank"
+              className="btn btn-lg btn-primary"
+            >
               <CalendarCheck className="h-4 w-4" aria-hidden />
               Book Appointment
-            </Link>
+            </a>
 
             <Link href="/contact" className="btn btn-lg btn-outline">
               <Phone className="h-4 w-4" aria-hidden />
@@ -394,6 +398,7 @@ const ServiceDetailsPage = ({ data }) => {
                   <div className="mt-auto pt-6">
                     <a
                       href={APPOINTMENT_URL}
+                      target="_blank"
                       className={`inline-flex items-center gap-2.5 text-sm font-semibold text-secondary-500 hover:text-primary-600 ${focusRing}`}
                     >
                       Consult a specialist
@@ -430,13 +435,17 @@ const ServiceDetailsPage = ({ data }) => {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Link href="/appointment" className="btn btn-primary">
+              <a
+                href={APPOINTMENT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
                 Book Appointment
                 <span className="btn-icon">
                   <ArrowUpRight className="h-4 w-4" aria-hidden />
                 </span>
-              </Link>
-
+              </a>
               <a href={`tel:${CONTACT_INFO.phone}`} className="btn btn-outline">
                 <Phone className="h-4 w-4" aria-hidden />
                 Call Us

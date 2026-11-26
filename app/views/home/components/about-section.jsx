@@ -1,4 +1,4 @@
-import { ArrowUpRight, Award, Check, Phone, Play } from "lucide-react";
+import { ArrowUpRight, Award, Check, Phone } from "lucide-react";
 import PageWrapper from "../../layouts/page-wrapper";
 import { CONTACT_INFO } from "@/app/const";
 import SectionHeader from "../../layouts/section-header";
@@ -7,7 +7,6 @@ import Link from "next/link";
 /* ------------------------------------------------------------------ */
 /* Centralized content. Pass `content` to override any key.            */
 /* Images are optional: without `src` a soft gradient is shown.        */
-/* Suggested sizes: video 600x600 (or 16:9), wide 1200x750 (16:10).    */
 /* ------------------------------------------------------------------ */
 const DEFAULT_CONTENT = {
   title: "Compassionate care for every family",
@@ -23,10 +22,8 @@ const DEFAULT_CONTENT = {
 
   images: {
     video: {
-      src: "",
+      src: "/Images/about-2.webp",
       alt: "Doctor caring for a mother and her newborn",
-      href: "#tour",
-      label: "Watch our hospital video",
     },
 
     wide: {
@@ -116,6 +113,7 @@ export default function AboutSection({ content }) {
               <ArrowUpRight className="h-[18px] w-[18px]" aria-hidden />
             </span>
           </Link>
+
           <a
             href={c.contact.href}
             className={`group flex items-center gap-3.5 rounded-full ${focusRing}`}
@@ -152,19 +150,10 @@ export default function AboutSection({ content }) {
           </div>
         </div>
 
-        {/* Video thumbnail */}
-        <a
-          href={video.href}
-          aria-label={video.label}
-          className={`group relative col-span-2 aspect-[16/9] overflow-hidden rounded-3xl sm:col-span-1 sm:aspect-auto sm:min-h-[12rem] ${focusRing}`}
-        >
+        {/* Static image (previously video thumbnail) */}
+        <div className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-3xl sm:col-span-1 sm:aspect-auto sm:min-h-[12rem]">
           <Photo src={video.src} alt={video.alt} />
-          <span className="absolute inset-0 grid place-items-center bg-primary-500/10 group-hover:bg-primary-500/25">
-            <span className="grid h-14 w-14 place-items-center rounded-full bg-white text-slate-700 shadow-[0_10px_30px_-10px_rgba(53,24,63,0.5)] group-hover:bg-primary-500 group-hover:text-white">
-              <Play className="ml-0.5 h-5 w-5 fill-current" aria-hidden />
-            </span>
-          </span>
-        </a>
+        </div>
 
         {/* Wide image */}
         <div className="col-span-2 aspect-[16/10] overflow-hidden rounded-3xl">

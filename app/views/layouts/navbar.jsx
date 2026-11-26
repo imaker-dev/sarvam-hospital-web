@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 import {
   ArrowUpRight,
-  Baby,
   ChevronDown,
   CircleSmall,
   Images,
@@ -13,6 +12,8 @@ import {
   Stethoscope,
   X,
 } from "lucide-react";
+
+import Link from "next/link";
 
 import PageWrapper from "./page-wrapper";
 
@@ -27,180 +28,134 @@ import {
 
 import { getServicesNav } from "@/app/data/services";
 
-import Link from "next/link";
+/* ------------------------------------------------------------------ */
+/* Navigation configuration                                            */
+/* ------------------------------------------------------------------ */
 
 const SERVICE_NAV_ITEMS = getServicesNav().map(
   ({ id, slug, title, description }) => ({
     id,
-
     icon: Stethoscope,
-
     label: title,
-
     desc: description,
-
     href: `/services/${slug}`,
   }),
 );
 
-/* ------------------------------------------------------------------ */
+const BRAND = {
+  name: "Sarvam",
+  href: "/",
+};
 
-/* Centralized config: edit here, UI follows.                          */
-
-/* Swap <a> for next/link's <Link> if you want client-side routing.    */
-
-/* ------------------------------------------------------------------ */
-
-const BRAND = { name: "Sarvam", href: "/" };
-
-// {
-
-// label: "Services",
-
-// href: "/services",
-
-// columns: 2,            // <-- add
-
-// itemsPerColumn: 4,     // <-- add
-
-// columnWidth: 23,       // <-- optional, rem per column (default 23 => 46rem panel)
-
-// viewAll: { label: "View all services", href: "/services" },
-
-// children: SERVICE_NAV_ITEMS,
-
-// },
+const GOOGLE_REVIEWS_URL = "https://share.google/laDvFRsp8dPQFB5nO";
 
 const NAV_ITEMS = [
   {
     label: "Home",
-
     href: "/",
   },
-
   {
     label: "About us",
-
     href: "/about",
   },
-
   {
     label: "Services",
-
     href: "/services",
-
     columns: 2,
-
     itemsPerColumn: 4,
-
     viewAll: {
       label: "View all services",
-
       href: "/services",
     },
-
     children: SERVICE_NAV_ITEMS,
   },
-
   {
     label: "Our doctors",
-
     href: "/doctors",
   },
-
   {
     label: "More",
-
     children: [
       {
         label: "Blogs",
-
         desc: "Health insights & updates",
-
         href: "/blogs",
-
         icon: Newspaper,
       },
-
       {
         label: "Gallery",
-
         desc: "Our hospital & moments",
-
         href: "/gallery",
-
         icon: Images,
       },
-
       {
-        label: "Testimonials",
-
+        label: "Google Reviews",
         desc: "Stories from our families",
-
-        href: "/testimonials",
-
+        href: GOOGLE_REVIEWS_URL,
         icon: Quote,
+        external: true,
       },
-
       {
         label: "FAQs",
-
         desc: "Answers to common questions",
-
         href: "/faq",
-
         icon: MessageCircle,
       },
     ],
   },
-
   {
     label: "Contact us",
-
     href: "/contact",
   },
 ];
 
-// const CTA = { label: "Book an appointment", href: "#book" };
-
 const CTA = {
   label: "Call now",
-
   href: `tel:${CONTACT_INFO.phone.replace(/\D/g, "")}`,
 };
 
 const SOCIALS = [
-  { label: "Facebook", icon: FacebookIcon, href: CONTACT_INFO.social.facebook },
-
-  { label: "X", icon: XIcon, href: CONTACT_INFO.social.twitter },
-
+  {
+    label: "Facebook",
+    icon: FacebookIcon,
+    href: CONTACT_INFO.social.facebook,
+  },
+  {
+    label: "X",
+    icon: XIcon,
+    href: CONTACT_INFO.social.twitter,
+  },
   {
     label: "Instagram",
-
     icon: InstagramIcon,
-
     href: CONTACT_INFO.social.instagram,
   },
-
-  { label: "YouTube", icon: YoutubeIcon, href: CONTACT_INFO.social.youtube },
+  {
+    label: "YouTube",
+    icon: YoutubeIcon,
+    href: CONTACT_INFO.social.youtube,
+  },
 ];
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500";
 
 /* ------------------------------------------------------------------ */
-
-/* Small pieces                                                        */
-
+/* Small components                                                    */
 /* ------------------------------------------------------------------ */
 
-function Logo() {
+function Logo({ onClick }) {
   return (
     <Link
       href={BRAND.href}
-      className={`flex items-center gap-2.5  ${focusRing}`}
+      onClick={onClick}
+      className={`flex items-center gap-2.5 ${focusRing}`}
     >
-      <img src={BRAND_LOGO} className="w-14 lg:w-16" />
+      <img
+        src={BRAND_LOGO}
+        alt={`${BRAND.name} logo`}
+        className="w-14 lg:w-16"
+      />
     </Link>
   );
 }
@@ -222,27 +177,26 @@ function CtaButton({ onClick }) {
 }
 
 const isActive = (item, activeHref) =>
-  item.href === activeHref || item.children?.some((c) => c.href === activeHref);
+  item.href === activeHref ||
+  item.children?.some((child) => !child.external && child.href === activeHref);
 
 /* ------------------------------------------------------------------ */
-
-/* Desktop                                                             */
-
+/* Utility                                                             */
 /* ------------------------------------------------------------------ */
 
 const chunk = (arr, size) => {
   const out = [];
 
-  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+  for (let i = 0; i < arr.length; i += size) {
+    out.push(arr.slice(i, i + size));
+  }
 
   return out;
 };
 
-/* ================================================================== */
-
-/* STEP 3: replace your whole DesktopNav function with this one       */
-
-/* ================================================================== */
+/* ------------------------------------------------------------------ */
+/* Desktop navigation                                                  */
+/* ------------------------------------------------------------------ */
 
 function DesktopNav({ activeHref }) {
   return (
@@ -254,12 +208,6 @@ function DesktopNav({ activeHref }) {
           const base = `relative flex items-center gap-1.5 rounded-full px-4 py-2.5 text-[0.9375rem] font-medium transition-colors hover:bg-white/70 hover:text-secondary-500 ${focusRing} ${
             active ? "text-secondary-500" : "text-secondary-900"
           }`;
-
-          const Trigger = item.href ? "a" : "button";
-
-          /* Split children into columns (e.g. 2 columns x 4 items).
-
-             Items beyond columns * itemsPerColumn are reachable via "View all". */
 
           const perColumn = item.itemsPerColumn;
 
@@ -278,23 +226,24 @@ function DesktopNav({ activeHref }) {
 
           return (
             <li key={item.label} className="group relative">
-              <Trigger
-                {...(item.href ? { href: item.href } : { type: "button" })}
-                className={base}
-              >
-                {item.label}
+              {item.href ? (
+                <Link href={item.href} className={base}>
+                  {item.label}
+                </Link>
+              ) : (
+                <button type="button" className={base}>
+                  {item.label}
 
-                {item.children && (
-                  <ChevronDown
-                    className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
-                    aria-hidden
-                  />
-                )}
-              </Trigger>
+                  {item.children && (
+                    <ChevronDown
+                      className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                      aria-hidden
+                    />
+                  )}
+                </button>
+              )}
 
               {item.children && (
-                /* left-0: panel starts exactly where the menu item starts */
-
                 <div className="invisible absolute left-0 top-full z-10 translate-y-1 pt-4 opacity-0 transition duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none">
                   <div
                     className={`relative max-w-[calc(100vw-2rem)] rounded-3xl border border-secondary-500/8 bg-white p-2.5 shadow-[0_30px_70px_-25px_rgba(2,53,118,0.35)] ${
@@ -308,14 +257,10 @@ function DesktopNav({ activeHref }) {
                         : undefined
                     }
                   >
-                    {/* notch, aligned to the start of the trigger */}
-
                     <span
                       aria-hidden
                       className="absolute -top-1.5 left-6 h-3 w-3 rotate-45 border-l border-t border-secondary-500/8 bg-white"
                     />
-
-                    {/* one <ul> per column, thin divider between columns */}
 
                     <div
                       className={
@@ -339,46 +284,64 @@ function DesktopNav({ activeHref }) {
                           {group.map((child) => {
                             const Icon = child.icon;
 
-                            const childActive = child.href === activeHref;
+                            const childActive =
+                              !child.external && child.href === activeHref;
+
+                            const className =
+                              "group/item flex items-center gap-3.5 rounded-2xl p-3 transition-colors hover:bg-primary-50 focus-visible:bg-primary-50 focus-visible:outline-none";
+
+                            const content = (
+                              <>
+                                {Icon && (
+                                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary-50 text-secondary-500 transition-colors group-hover/item:bg-secondary-500 group-hover/item:text-white group-focus-visible/item:bg-secondary-500 group-focus-visible/item:text-white">
+                                    <Icon
+                                      className="h-[18px] w-[18px]"
+                                      aria-hidden
+                                    />
+                                  </span>
+                                )}
+
+                                <span className="min-w-0 flex-1">
+                                  <span
+                                    className={`block text-[0.9375rem] font-semibold leading-tight ${
+                                      childActive
+                                        ? "text-primary-500"
+                                        : "text-secondary-500"
+                                    }`}
+                                  >
+                                    {child.label}
+                                  </span>
+
+                                  {child.desc && (
+                                    <span className="mt-0.5 block truncate text-[0.8125rem] leading-snug text-secondary-900">
+                                      {child.desc}
+                                    </span>
+                                  )}
+                                </span>
+
+                                <ArrowUpRight
+                                  className="h-4 w-4 shrink-0 -translate-x-1 text-primary-500 opacity-0 transition group-hover/item:translate-x-0 group-hover/item:opacity-100"
+                                  aria-hidden
+                                />
+                              </>
+                            );
 
                             return (
                               <li key={child.label}>
-                                <a
-                                  href={child.href}
-                                  className="group/item flex items-center gap-3.5 rounded-2xl p-3 transition-colors hover:bg-primary-50 focus-visible:bg-primary-50 focus-visible:outline-none"
-                                >
-                                  {Icon && (
-                                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary-50 text-secondary-500 transition-colors group-hover/item:bg-secondary-500 group-hover/item:text-white group-focus-visible/item:bg-secondary-500 group-focus-visible/item:text-white">
-                                      <Icon
-                                        className="h-[18px] w-[18px]"
-                                        aria-hidden
-                                      />
-                                    </span>
-                                  )}
-
-                                  <span className="min-w-0 flex-1">
-                                    <span
-                                      className={`block text-[0.9375rem] font-semibold leading-tight ${
-                                        childActive
-                                          ? "text-primary-500"
-                                          : "text-secondary-500"
-                                      }`}
-                                    >
-                                      {child.label}
-                                    </span>
-
-                                    {child.desc && (
-                                      <span className="mt-0.5 block truncate text-[0.8125rem] leading-snug text-secondary-900">
-                                        {child.desc}
-                                      </span>
-                                    )}
-                                  </span>
-
-                                  <ArrowUpRight
-                                    className="h-4 w-4 shrink-0 -translate-x-1 text-primary-500 opacity-0 transition group-hover/item:translate-x-0 group-hover/item:opacity-100"
-                                    aria-hidden
-                                  />
-                                </a>
+                                {child.external ? (
+                                  <a
+                                    href={child.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={className}
+                                  >
+                                    {content}
+                                  </a>
+                                ) : (
+                                  <Link href={child.href} className={className}>
+                                    {content}
+                                  </Link>
+                                )}
                               </li>
                             );
                           })}
@@ -387,14 +350,14 @@ function DesktopNav({ activeHref }) {
                     </div>
 
                     {item.viewAll && (
-                      <a
+                      <Link
                         href={item.viewAll.href}
                         className="mt-2 flex items-center justify-between rounded-2xl bg-primary-50 px-4 py-3.5 text-sm font-semibold text-secondary-500 transition-colors hover:text-primary-500 focus-visible:text-primary-500 focus-visible:outline-none"
                       >
                         {item.viewAll.label}
 
                         <ArrowUpRight className="h-4 w-4" aria-hidden />
-                      </a>
+                      </Link>
                     )}
                   </div>
                 </div>
@@ -408,17 +371,11 @@ function DesktopNav({ activeHref }) {
 }
 
 /* ------------------------------------------------------------------ */
-
-/* Mobile drawer (rendered outside <header> so backdrop-blur on the    */
-
-/* header can't become the containing block of `fixed`)                */
-
+/* Mobile drawer                                                        */
 /* ------------------------------------------------------------------ */
 
 function MobileDrawer({ open, onClose, activeHref, closeRef }) {
   const [expanded, setExpanded] = useState(null);
-
-  // collapse submenus when drawer closes
 
   useEffect(() => {
     if (!open) setExpanded(null);
@@ -428,13 +385,15 @@ function MobileDrawer({ open, onClose, activeHref, closeRef }) {
     transitionDelay: open ? `${140 + i * 45}ms` : "0ms",
   });
 
-  const item = `transition duration-300 motion-reduce:transition-none ${
+  const itemClass = `transition duration-300 motion-reduce:transition-none ${
     open ? "translate-x-0 opacity-100" : "-translate-x-3 opacity-0"
   }`;
 
   return (
     <div
-      className={`fixed inset-0 z-[60] lg:hidden ${open ? "visible" : "invisible delay-300"} transition-[visibility]`}
+      className={`fixed inset-0 z-[60] lg:hidden ${
+        open ? "visible" : "invisible delay-300"
+      } transition-[visibility]`}
     >
       {/* Overlay */}
 
@@ -485,30 +444,32 @@ function MobileDrawer({ open, onClose, activeHref, closeRef }) {
 
               const active = isActive(navItem, activeHref);
 
-              const labelCls = `flex-1 py-4 text-[1.0625rem] font-medium ${active ? "text-primary-500" : "text-secondary-500"}`;
+              const labelClass = `flex-1 py-4 text-[1.0625rem] font-medium ${
+                active ? "text-primary-500" : "text-secondary-500"
+              }`;
 
               return (
                 <li
                   key={navItem.label}
                   style={stagger(i)}
-                  className={`border-b border-secondary-500/8 ${item}`}
+                  className={`border-b border-secondary-500/8 ${itemClass}`}
                 >
                   <div className="flex items-center">
                     {navItem.href ? (
-                      <a
+                      <Link
                         href={navItem.href}
                         onClick={onClose}
-                        className={`${labelCls} ${focusRing}`}
+                        className={`${labelClass} ${focusRing}`}
                       >
                         {navItem.label}
-                      </a>
+                      </Link>
                     ) : (
                       <button
                         type="button"
                         onClick={() =>
                           setExpanded(isOpen ? null : navItem.label)
                         }
-                        className={`${labelCls} text-left ${focusRing}`}
+                        className={`${labelClass} text-left ${focusRing}`}
                       >
                         {navItem.label}
                       </button>
@@ -518,7 +479,9 @@ function MobileDrawer({ open, onClose, activeHref, closeRef }) {
                       <button
                         type="button"
                         aria-expanded={isOpen}
-                        aria-label={`${isOpen ? "Collapse" : "Expand"} ${navItem.label}`}
+                        aria-label={`${
+                          isOpen ? "Collapse" : "Expand"
+                        } ${navItem.label}`}
                         onClick={() =>
                           setExpanded(isOpen ? null : navItem.label)
                         }
@@ -529,7 +492,9 @@ function MobileDrawer({ open, onClose, activeHref, closeRef }) {
                         }`}
                       >
                         <ChevronDown
-                          className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                          className={`h-4 w-4 transition-transform duration-300 ${
+                            isOpen ? "rotate-180" : ""
+                          }`}
                           aria-hidden
                         />
                       </button>
@@ -543,20 +508,37 @@ function MobileDrawer({ open, onClose, activeHref, closeRef }) {
                       }`}
                     >
                       <ul className="overflow-hidden" aria-hidden={!isOpen}>
-                        {navItem.children.map((child) => (
-                          <li key={child.label}>
-                            <a
-                              href={child.href}
-                              onClick={onClose}
-                              tabIndex={isOpen ? 0 : -1}
-                              className={`flex items-center gap-3 py-3 pl-1 text-[0.9375rem] text-secondary-900 transition-colors hover:text-secondary-500 ${focusRing}`}
-                            >
-                              <CircleSmall className="w-4 h-4 text-primary-500" />
+                        {navItem.children.map((child) => {
+                          const childClass = `flex items-center gap-3 py-3 pl-1 text-[0.9375rem] text-secondary-900 transition-colors hover:text-secondary-500 ${focusRing}`;
 
-                              {child.label}
-                            </a>
-                          </li>
-                        ))}
+                          return (
+                            <li key={child.label}>
+                              {child.external ? (
+                                <a
+                                  href={child.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={onClose}
+                                  tabIndex={isOpen ? 0 : -1}
+                                  className={childClass}
+                                >
+                                  <CircleSmall className="h-4 w-4 text-primary-500" />
+                                  {child.label}
+                                </a>
+                              ) : (
+                                <Link
+                                  href={child.href}
+                                  onClick={onClose}
+                                  tabIndex={isOpen ? 0 : -1}
+                                  className={childClass}
+                                >
+                                  <CircleSmall className="h-4 w-4 text-primary-500" />
+                                  {child.label}
+                                </Link>
+                              )}
+                            </li>
+                          );
+                        })}
 
                         <li aria-hidden className="h-2" />
                       </ul>
@@ -569,7 +551,7 @@ function MobileDrawer({ open, onClose, activeHref, closeRef }) {
         </nav>
 
         <div className="shrink-0 space-y-5 border-t border-secondary-500/8 bg-primary-50/60 px-5 pb-6 pt-5">
-          <CtaButton onClick={onClose} className="w-full" />
+          <CtaButton onClick={onClose} />
 
           <div className="flex items-center justify-center gap-4">
             <ul className="flex gap-2">
@@ -578,6 +560,8 @@ function MobileDrawer({ open, onClose, activeHref, closeRef }) {
                   <a
                     href={href}
                     aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={`grid h-9 w-9 place-items-center rounded-lg border border-secondary-500/12 bg-white text-secondary-500 transition-colors hover:border-primary-500 hover:text-primary-500 ${focusRing}`}
                   >
                     <Icon className="h-4 w-4" />
@@ -593,9 +577,7 @@ function MobileDrawer({ open, onClose, activeHref, closeRef }) {
 }
 
 /* ------------------------------------------------------------------ */
-
 /* Navbar                                                              */
-
 /* ------------------------------------------------------------------ */
 
 export default function Navbar({ activeHref = "/" }) {
@@ -618,17 +600,19 @@ export default function Navbar({ activeHref = "/" }) {
 
     onScroll();
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, {
+      passive: true,
+    });
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Scroll lock, Escape to close, close when reaching desktop width
+  // Scroll lock, Escape to close, close on desktop resize
 
   useEffect(() => {
     if (!open) return;
 
-    const prev = document.body.style.overflow;
+    const previousOverflow = document.body.style.overflow;
 
     document.body.style.overflow = "hidden";
 
@@ -641,7 +625,7 @@ export default function Navbar({ activeHref = "/" }) {
     window.addEventListener("resize", onResize);
 
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = previousOverflow;
 
       window.removeEventListener("keydown", onKey);
 
@@ -649,11 +633,14 @@ export default function Navbar({ activeHref = "/" }) {
     };
   }, [open]);
 
-  // Focus management: into drawer on open, back to trigger on close
+  // Focus management
 
   useEffect(() => {
-    if (open) closeBtnRef.current?.focus();
-    else if (wasOpen.current) menuBtnRef.current?.focus();
+    if (open) {
+      closeBtnRef.current?.focus();
+    } else if (wasOpen.current) {
+      menuBtnRef.current?.focus();
+    }
 
     wasOpen.current = open;
   }, [open]);
@@ -678,8 +665,6 @@ export default function Navbar({ activeHref = "/" }) {
             <DesktopNav activeHref={activeHref} />
 
             <div className="flex items-center justify-self-end">
-              {/* Wrapper controls visibility: only on large desktop (xl+) */}
-
               <div className="hidden xl:block">
                 <CtaButton />
               </div>

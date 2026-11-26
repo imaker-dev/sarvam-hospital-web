@@ -3,12 +3,13 @@
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, EffectFade, Keyboard } from "swiper/modules";
-import { ArrowLeft, ArrowRight, Quote, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Quote, Star } from "lucide-react";
 import PageWrapper from "../../layouts/page-wrapper";
 import SectionHeader from "../../layouts/section-header";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
+import { GOOGLE_REVIEWS_URL } from "@/app/const";
 
 /* ------------------------------------------------------------------ */
 /* Centralized content. Pass `content` to override any key.            */
@@ -72,7 +73,12 @@ const pad = (n) => String(n).padStart(2, "0");
 function Avatar({ src, name, className = "" }) {
   const initial = name.trim().charAt(0).toUpperCase();
   return src ? (
-    <img src={src} alt="" loading="lazy" className={`rounded-full object-cover ${className}`} />
+    <img
+      src={src}
+      alt=""
+      loading="lazy"
+      className={`rounded-full object-cover ${className}`}
+    />
   ) : (
     <span
       aria-hidden
@@ -100,24 +106,47 @@ export default function TestimonialSection({ content }) {
     >
       {/* ---------- Content ---------- */}
       <div>
-        <SectionHeader badge={c.badge} title={c.title} highlight={c.highlight} align="start" light />
+        <SectionHeader
+          badge={c.badge}
+          title={c.title}
+          highlight={c.highlight}
+          align="start"
+          light
+        />
 
         <div aria-hidden className="mb-8 h-px w-full bg-white/15 lg:mb-10" />
 
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
-          <ul className="flex -space-x-3">
-            {c.stats.avatars.map((a) => (
-              <li key={a.name}>
-                <Avatar src={a.src} name={a.name} className="h-12 w-12 ring-2 ring-secondary-500" />
-              </li>
-            ))}
-          </ul>
-          <div>
-            <p className="text-lg font-semibold text-white">
-              {c.stats.value} {c.stats.label}
-            </p>
-            <p className="mt-0.5 text-sm text-white/70">{c.stats.caption}</p>
+        <div className="mt-8">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
+            <ul className="flex -space-x-3">
+              {c.stats.avatars.map((a) => (
+                <li key={a.name}>
+                  <Avatar
+                    src={a.src}
+                    name={a.name}
+                    className="h-12 w-12 ring-2 ring-secondary-500"
+                  />
+                </li>
+              ))}
+            </ul>
+
+            <div>
+              <p className="text-lg font-semibold text-white">
+                {c.stats.value} {c.stats.label}
+              </p>
+              <p className="mt-0.5 text-sm text-white/70">{c.stats.caption}</p>
+            </div>
           </div>
+
+          <a
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-400 transition-colors hover:text-white"
+          >
+            Read our Google Reviews
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
         </div>
       </div>
 
@@ -146,7 +175,11 @@ export default function TestimonialSection({ content }) {
             <SwiperSlide key={r.name} className="!h-auto">
               <div className="flex h-full flex-col">
                 <div className="flex items-start justify-between gap-4">
-                  <div className="flex gap-1" role="img" aria-label={`Rated ${r.rating} out of 5`}>
+                  <div
+                    className="flex gap-1"
+                    role="img"
+                    aria-label={`Rated ${r.rating} out of 5`}
+                  >
                     {Array.from({ length: 5 }).map((_, s) => (
                       <Star
                         key={s}
@@ -155,7 +188,10 @@ export default function TestimonialSection({ content }) {
                       />
                     ))}
                   </div>
-                  <Quote className="h-9 w-9 shrink-0 fill-white/10 text-white/10" aria-hidden />
+                  <Quote
+                    className="h-9 w-9 shrink-0 fill-white/10 text-white/10"
+                    aria-hidden
+                  />
                 </div>
 
                 <blockquote className="mt-5 text-[1.0625rem] leading-[1.75] text-white sm:text-xl sm:leading-[1.7]">
@@ -163,9 +199,15 @@ export default function TestimonialSection({ content }) {
                 </blockquote>
 
                 <div className="mt-auto flex items-center gap-3.5 pt-8">
-                  <Avatar src={r.avatar} name={r.name} className="h-12 w-12 shrink-0" />
+                  <Avatar
+                    src={r.avatar}
+                    name={r.name}
+                    className="h-12 w-12 shrink-0"
+                  />
                   <div className="min-w-0">
-                    <p className="truncate font-semibold text-white">{r.name}</p>
+                    <p className="truncate font-semibold text-white">
+                      {r.name}
+                    </p>
                     <p className="truncate text-sm text-white/70">{r.role}</p>
                   </div>
                 </div>
@@ -176,7 +218,10 @@ export default function TestimonialSection({ content }) {
 
         {/* Footer: counter on the left, arrows on the right */}
         <div className="mt-7 flex items-center justify-between border-t border-white/10 pt-5">
-          <p className="text-sm font-medium tabular-nums text-white/60" aria-hidden>
+          <p
+            className="text-sm font-medium tabular-nums text-white/60"
+            aria-hidden
+          >
             <span className="text-white">{pad(active + 1)}</span> / {pad(total)}
           </p>
 

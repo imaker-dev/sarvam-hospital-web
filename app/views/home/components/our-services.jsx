@@ -112,7 +112,7 @@ export default function OurServices({ content }) {
 
       <div className="w-full flex justify-center mt-8">
         <Link href={"/services"} className="btn btn-primary">
-          View All Serives{" "}
+          View All Services{" "}
           <span className="btn-icon">
             <ArrowUpRight />
           </span>

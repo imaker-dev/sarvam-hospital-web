@@ -19,6 +19,8 @@ export const CONTACT_INFO = {
 
 export const APPOINTMENT_URL = "https://remedoapp.com/rweb/doctors/drprashantsagar?param=booking"
 
+export const GOOGLE_REVIEWS_URL = "https://share.google/laDvFRsp8dPQFB5nO";
+
 export const BASE_URL = "https://www.sarvamhospital.com";
 
 export const BRAND_LOGO = "/Images/logo-new.png";
