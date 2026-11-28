@@ -15,7 +15,7 @@ import {
   Check,
 } from "lucide-react";
 import { Eyebrow } from "../layouts/section-header";
-import { CONTACT_INFO } from "@/app/const";
+import { APPOINTMENT_URL, CONTACT_INFO } from "@/app/const";
 import PageWrapper from "../layouts/page-wrapper";
 
 /* ------------------------------------------------------------------ */
@@ -133,7 +133,8 @@ const DoctorDetailsPage = ({ data }) => {
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
-                href={telHref(CONTACT_INFO.phone)}
+                href={APPOINTMENT_URL}
+                target="_blank"
                 className="btn btn-lg btn-primary"
               >
                 {bookLabel}
@@ -404,6 +405,7 @@ const DoctorDetailsPage = ({ data }) => {
                 <div className="mt-5 space-y-2.5">
                   <a
                     href={appointment?.cta?.href || telHref(CONTACT_INFO.phone)}
+                    target="_blank"
                     className="btn w-full btn-primary"
                   >
                     {appointment?.cta?.label || bookLabel}

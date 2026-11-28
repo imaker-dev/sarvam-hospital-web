@@ -1,3 +1,5 @@
+import { APPOINTMENT_URL } from "../const";
+
 export const doctors = [
   {
     id: "dr-prashant-sagar",
@@ -126,7 +128,7 @@ export const doctors = [
         email: "",
         cta: {
           label: "Book Appointment",
-          href: "/contact",
+          href: APPOINTMENT_URL,
         },
       },
 
@@ -251,7 +253,7 @@ export const doctors = [
         email: "",
         cta: {
           label: "Book Appointment",
-          href: "/contact",
+          href: APPOINTMENT_URL,
         },
       },
 

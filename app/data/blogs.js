@@ -1,3 +1,5 @@
+import { APPOINTMENT_URL } from "../const";
+
 export const blogs = [
   {
     id: "pregnancy-care-guide",
@@ -91,7 +93,7 @@ export const blogs = [
         description:
           "Our team is here to support you throughout your pregnancy journey with personalized maternity care.",
         buttonText: "Book an Appointment",
-        href: "/contact",
+        href: APPOINTMENT_URL,
       },
 
       faqs: [
@@ -215,7 +217,7 @@ export const blogs = [
         description:
           "Consult our gynecology team to discuss your symptoms and explore appropriate care options.",
         buttonText: "Book a Consultation",
-        href: "/contact",
+        href: APPOINTMENT_URL,
       },
 
       faqs: [

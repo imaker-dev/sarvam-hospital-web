@@ -8,6 +8,7 @@ import {
   Menu,
   MessageCircle,
   Newspaper,
+  Phone,
   Quote,
   Stethoscope,
   X,
@@ -172,6 +173,19 @@ function CtaButton({ onClick }) {
       <span className="btn-icon">
         <ArrowUpRight className="h-4 w-4" aria-hidden />
       </span>
+    </a>
+  );
+}
+
+function MobileCallButton() {
+  return (
+    <a
+      href={CTA.href}
+      aria-label={CTA.label}
+      className={`inline-flex h-11 items-center gap-1.5 rounded-full bg-primary-500 px-4 text-sm font-semibold text-white transition-colors hover:bg-primary-600 xl:hidden ${focusRing}`}
+    >
+      <Phone className="h-4 w-4" aria-hidden />
+      {CTA.label}
     </a>
   );
 }
@@ -550,9 +564,7 @@ function MobileDrawer({ open, onClose, activeHref, closeRef }) {
           </ul>
         </nav>
 
-        <div className="shrink-0 space-y-5 border-t border-secondary-500/8 bg-primary-50/60 px-5 pb-6 pt-5">
-          <CtaButton onClick={onClose} />
-
+        <div className="shrink-0 border-t border-secondary-500/8 bg-primary-50/60 px-5 pb-6 pt-5">
           <div className="flex items-center justify-center gap-4">
             <ul className="flex gap-2">
               {SOCIALS.map(({ label, icon: Icon, href }) => (
@@ -664,10 +676,12 @@ export default function Navbar({ activeHref = "/" }) {
 
             <DesktopNav activeHref={activeHref} />
 
-            <div className="flex items-center justify-self-end">
+            <div className="flex items-center justify-self-end gap-3">
               <div className="hidden xl:block">
                 <CtaButton />
               </div>
+
+              <MobileCallButton />
 
               <button
                 ref={menuBtnRef}

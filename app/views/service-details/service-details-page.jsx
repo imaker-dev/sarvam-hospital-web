@@ -267,7 +267,7 @@ const ServiceDetailsPage = ({ data }) => {
 
             {/* Help card */}
 
-            <div className="rounded-3xl bg-secondary-500 p-6 text-white">
+            {/* <div className="rounded-3xl bg-secondary-500 p-6 text-white">
               <span className="grid h-10 w-10 place-items-center rounded-full bg-primary-300 text-secondary-500">
                 <Phone className="h-[18px] w-[18px]" aria-hidden />
               </span>
@@ -290,7 +290,7 @@ const ServiceDetailsPage = ({ data }) => {
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </span>
               </Link>
-            </div>
+            </div> */}
           </div>
         </aside>
 

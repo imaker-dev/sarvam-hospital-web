@@ -20,7 +20,7 @@ const DEFAULT_CONTENT = {
   title: "Heartfelt reviews from our loving families",
   highlight: "our loving families",
   stats: {
-    value: "1,000+",
+    value: "10K+",
     label: "Happy families",
     caption: "Real stories. Real care. Real families.",
     avatars: [

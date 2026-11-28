@@ -19,11 +19,11 @@ const DEFAULT_CONTENT = {
     "A hospital built around the health of women and children, with specialist doctors, modern facilities and round-the-clock emergency care under one roof.",
   primaryCta: { label: "Book a Visit", href: APPOINTMENT_URL },
   secondaryCta: { label: "Explore Clinic", href: "#tour" },
-stats: [
-  { value: "15", suffix: "+", label: "Years" },
-  { value: "24/7", suffix: "", label: "Support" },
-  { value: "10K", suffix: "+", label: "Families" },
-],
+  stats: [
+    { value: "16", suffix: "+", label: "Years" },
+    { value: "24/7", suffix: "", label: "Support" },
+    { value: "10K", suffix: "+", label: "Families" },
+  ],
   slides: [
     {
       image: {
